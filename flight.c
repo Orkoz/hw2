@@ -32,12 +32,17 @@ typedef struct flight_t{
 FLIGHT* createFlight(int flight_num, FlightType flight_type, char destination[], BOOL emergency){
 	
 	FLIGHT* temp_flight = (FLIGHT*)malloc(sizeof(FLIGHT));
-	temp_flight->flight_num=flight_num;
-	temp_flight->flight_type=flight_type;
-	temp_flight->destination=destination;
-	temp_flight->emergency=emergency;
-	
-	return temp_flight;
+	if (temp_flight)
+	{
+		temp_flight->flight_num=flight_num;
+		temp_flight->flight_type=flight_type;
+		temp_flight->destination=destination;
+		temp_flight->emergency=emergency;
+		return temp_flight;
+	} else {
+		return NULL;
+	}
+
 }
 
 //*************************************************************************
