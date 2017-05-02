@@ -28,6 +28,15 @@ FLIGHT* createFlight(int flight_num, FlightType flight_type, char destination[],
 	return temp_flight;
 }
 
-void destroyFlight(*FLIGHT flight);
-void printFlight(*FLIGHT flight);
-
+void destroyFlight(*FLIGHT flight){
+	FLIGHT* temp_flight = flight->pNext;
+	flight=delet_flight;
+	free(temp_flight);
+}
+void printFlight(*FLIGHT flight){
+	char emg = R;
+	char type = D;
+	if (emergency==TRUE) emg = E;
+	if (FlightType==INTERNATIONAL) type = I;
+	printf("Flight %n %d %s %d", flight->flight_num,type,flight->destination,emg);
+}
