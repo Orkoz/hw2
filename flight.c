@@ -5,7 +5,9 @@
 //* Return Value:
 //*************************************************************************
 
-#include <AirPort_Include_File.h>
+
+#include "AirPort_Include_File.h"
+
 
 typedef struct flight_t{
 	int flight_num;
@@ -29,9 +31,10 @@ typedef struct flight_t{
 
 FLIGHT* createFlight(int flight_num, FlightType flight_type, char destination[], BOOL emergency){
 	
+
 	bool valid = is_num_valid(flight_num) && is_type_valid(flight_type) && is_destination_valid(destination) && is_emergency_valid(emergency);
 	
-	if (valid)
+	if (valid && temp_flight)
 	{
 		FLIGHT* temp_flight = (FLIGHT*)malloc(sizeof(FLIGHT));
 		temp_flight->flight_num=flight_num;
