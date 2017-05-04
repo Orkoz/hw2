@@ -1,7 +1,11 @@
 #ifndef AIRPOET_H_
 #define AIRPOET_H_
 
-#include <AirPort_Include_File.h>
+#include "ex2.h"
+#include "runway.h"
+#include "flight.h"
+#include "stdio.h"
+#include "stdlib.h"
 
 typedef struct airport_t AIRPORT;
 
