@@ -5,5 +5,9 @@
 #include <airport.h>
 #include <runway.h>
 #include <flight.h>
+#include <inputs_validation.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #endif /* AirPort_Include_File_H_ */

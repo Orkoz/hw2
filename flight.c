@@ -6,16 +6,15 @@
 //*************************************************************************
 
 #include <AirPort_Include_File.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 typedef struct flight_t{
 	int flight_num;
 	FlightType flight_type;
-	char destination[3];
+	char destination[DEST_CHAR_NUM];
 	BOOL emergency;
 	struct FLIGHT* pNext;
 }FLIGHT;
+
 
 //*************************************************************************
 //* Function name: createFlight.
@@ -28,17 +27,23 @@ typedef struct flight_t{
 //* Return Value: a pointer to a flight struct.
 //*************************************************************************
 
-
 FLIGHT* createFlight(int flight_num, FlightType flight_type, char destination[], BOOL emergency){
 	
-	FLIGHT* temp_flight = (FLIGHT*)malloc(sizeof(FLIGHT));
-	temp_flight->flight_num=flight_num;
-	temp_flight->flight_type=flight_type;
-	temp_flight->destination=destination;
-	temp_flight->emergency=emergency;
+	bool valid = is_num_valid(flight_num) && is_type_valid(flight_type) && is_destination_valid(destination) && is_emergency_valid(emergency);
 	
-	return temp_flight;
+	if (valid)
+	{
+		FLIGHT* temp_flight = (FLIGHT*)malloc(sizeof(FLIGHT));
+		temp_flight->flight_num=flight_num;
+		temp_flight->flight_type=flight_type;
+		strcpy(temp_flight->destination,destination);
+		temp_flight->emergency=emergency;
+		return temp_flight;
+	}
+
+	return null;
 }
+
 
 //*************************************************************************
 //* Function name: destroyFlight.
@@ -48,12 +53,17 @@ FLIGHT* createFlight(int flight_num, FlightType flight_type, char destination[],
 //* Return Value: None.
 //*************************************************************************
 
-
-void destroyFlight(*FLIGHT flight){
+void destroyFlight(FLIGHT* flight){
 	FLIGHT* temp_flight = flight->pNext;
-	flight=delet_flight;
+	*flight=*temp_flight;
+	// in case *flight=*temp_flight dont work:
+		// flight->flight_num=temp_flight->flight_num;
+		// flight->flight_type=temp_flight->flight_type;
+		// flight->destination=temp_flight->destination;
+		// flight->emergency=temp_flight->emergency;
 	free(temp_flight);
 }
+
 
 //*************************************************************************
 //* Function name: printFlight.
@@ -63,7 +73,7 @@ void destroyFlight(*FLIGHT flight){
 //* Return Value: None.
 //*************************************************************************
 
-void printFlight(*FLIGHT flight){
+void printFlight(FLIGHT* flight){
 	char emg = R;
 	char type = D;
 	if (emergency==TRUE) emg = E;
