@@ -6,5 +6,6 @@ typedef enum boolean_t {FALSE, TRUE} BOOL;
 typedef enum result_t {FAILURE, SUCCESS} Result;
 
 #define MAX_ID (100000)
+#define DEST_CHAR_NUM (3)
 
 #endif /* EX2_H_ */
