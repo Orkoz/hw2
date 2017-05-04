@@ -9,7 +9,7 @@
 typedef struct flight_t FLIGHT;
 
 FLIGHT* createFlight(int flight_num, FlightType flight_type, char destination[], BOOL emergency);
-void destroyFlight(*FLIGHT flight);
-void printFlight(*FLIGHT flight);
+void destroyFlight(FLIGHT* flight);
+void printFlight(FLIGHT* flight);
 
 #endif /* FLIGHT_H_*/
