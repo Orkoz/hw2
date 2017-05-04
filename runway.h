@@ -4,6 +4,7 @@
 #include "AirPort_Include_File.h"
 
 typedef struct runway_t RUNWAY;
+typedef struct flight_item FLIGHT_ITEM;
 
 RUNWAY* createRunway (int runway_num, FlightType runway_type);
 void destroyRunway (RUNWAY* runway);
