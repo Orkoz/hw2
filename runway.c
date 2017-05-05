@@ -132,8 +132,57 @@ int getFlightNum (*RUNWAY runway)
 
 Result addFlight (*RUNWAY runway, *FLIGHT flight)
 {
+	// checking pointers
+	if (runway ==NULL || flight == NULL)
+		return FAILURE;
 	
+	// checking runway type and if same flight num exists
+	if (runway->runway_type != flight->flight_type || isFlightExists (runway, flight->flight_num) == TRUE)
+		return FAILURE;
 	
+	// creating a copy of the flight
+	flight_copy = createFlight(flight->flight_num, flight->flight_type, flight->destination, flight->emergency);
+	// creating a new flight item for the liked list
+	FLIGHT_ITEM* new_flight_item = (FLIGHT_ITEM*)malloc(sizeof(FLIGHT_ITEM));
+	if (flight_copy == NULL || new_flight_item == NULL)
+		return FAILURE;
+	
+	new_flight_item->this_flight = flight_copy;
+	new_flight_item-next_flight_item = NULL;
+	
+	// creating a temp pointer for the loop
+	FLIGHT_ITEM* temp_flight_item = runway->first_flight;
+	
+	// dealing the case where there are no flights in the list
+	if (temp_flight_item == NULL)
+		runway->first_flight = new_flight_item;
+	
+	// dealing with emergency flights
+	if (flight_copy->emergency == TRUE)
+	{
+		// Dealing with the first item in the list
+		if (temp_flight_item->this_flight->emergency == FALSE)
+		{
+			new_flight_item->next_flight_item = temp_flight_item;
+			runway->first_flight = new_flight_item;
+		} else 
+		{		// Dealing with mid or end of the list
+			while (temp_flight_item->next_flight_item->this_flight->emergency == TRUE)
+			{
+				temp_flight_item = temp_flight_item->next_flight_item;
+			}
+			new_flight_item->next_flight_item = temp_flight_item->next_flight_item;
+			temp_flight_item->next_flight_item = new_flight_item;
+		}
+	} else	// dealing with adding the flight to the end of the list
+	{
+		while (temp_flight_item->next_flight_item != NULL)
+		{
+			temp_flight_item = temp_flight_item->next_flight_item;
+		}
+		temp_flight_item->next_flight_item = new_flight_item;
+	}
+	return SUCCESS;
 }
 
 //*************************************************************************
