@@ -12,11 +12,11 @@ typedef struct airport_t{
 	RUNWAY* last_runway;
 }AIRPORT;
 
-
 AIRPORT* createAirport(){
 	AIRPORT* airport = (AIRPORT*)malloc(sizeof(AIRPORT));
 	airport->runway_list = NULL;
 	airport->last_runway = NULL;
+	return airport;
 }
 
 Result addRunway{int runway_num, FlightType runway_type){
