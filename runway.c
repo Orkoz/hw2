@@ -21,6 +21,11 @@ typedef struct runway_t{
 	struct FLIGHT* first_flight; // not sure this is the right notation
 }	RUNWAY;
 
+typedef struct flight_item{
+	FLIGHT* this_flight;
+	FLIGHT_ITEM* next_flight_item;
+}	FLIGHT_ITEM;
+
 //*************************************************************************
 //* Function name:
 //* Description:
@@ -30,8 +35,9 @@ typedef struct runway_t{
 
 RUNWAY* createRunway (int runway_num, FlightType runway_type)
 {
+	// Do we need to check input vars here or in main?
 	RUNWAY* temp_runway = (RUNWAY*)malloc(sizeof(RUNWAY));
-	if (temp_runway)
+	if (temp_runway != NULL)
 	{
 		temp_runway->runway_num=runway_num;
 		temp_runway->runway_type=runway_type;
@@ -51,8 +57,24 @@ RUNWAY* createRunway (int runway_num, FlightType runway_type)
 
 void destroyRunway (*RUNWAY runway)
 {
-	
-	
+	// Do we need to check input vars here or in main?
+	if (runway == NULL)
+		return;
+	FLIGHT_ITEM* flight_item;
+	flight_item = runway->first_flight;
+	while (flight_item != NULL)
+	{
+		FLIGHT* temp_flight;
+		temp_flight  = flight_item->this_flight;
+		destroyFlight(temp_flight);
+		
+		FLIGHT_ITEM* temp_flight_item;
+		temp_flight_item = flight_item;
+		flight_item = flight_item->next_flight_item;
+		free(temp_flight_item);
+	}
+	free(runway);
+	return;
 }
 
 //*************************************************************************
@@ -77,8 +99,18 @@ bool isFlightExists (*RUNWAY runway, int flight_num)
 
 int getFlightNum (*RUNWAY runway)
 {
-	
-	
+	if (runway == NULL)
+		return -1;
+	int counter = 0;
+	FLIGHT_ITEM* flight_item;
+	flight_item = runway->first_flight;
+	while (flight_item != NULL)
+	{
+		if (flight_item->this_flight != NULL)
+			counter++;
+		flight_item = flight_item->next_flight_item;	
+	}
+	return counter;
 }
 
 //*************************************************************************
