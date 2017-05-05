@@ -18,7 +18,7 @@ enum מייצר טיפוס חדש
 typedef struct runway_t{
 	int runway_num;
 	FlightType runway_type;
-	struct FLIGHT* first_flight; // not sure this is the right notation
+	struct FLIGHT_ITEM* first_flight; // not sure this is the right notation
 }	RUNWAY;
 
 typedef struct flight_item{
@@ -86,8 +86,18 @@ void destroyRunway (*RUNWAY runway)
 
 bool isFlightExists (*RUNWAY runway, int flight_num)
 {
+	if (runway == NULL || is_num_valid(flight_num) == 0)
+		return FALSE;
+	FLIGHT_ITEM* temp_flight_item;
+	temp_flight_item = runway->first_flight;
 	
-	
+	while (temp_flight_item != NULL)
+	{
+		if (compare_flight_num(temp_flight_item->this_flight, flight_num) == TRUE)
+			return TRUE;
+		temp_flight_item = temp_flight_item->next_flight_item;
+	}
+	return FALSE;
 }
 
 //*************************************************************************
@@ -129,14 +139,44 @@ Result addFlight (*RUNWAY runway, *FLIGHT flight)
 //*************************************************************************
 //* Function name:
 //* Description:
+//* 			The only part in the program we need to remove a flight is when
+//* 			we destroy the airport. In that case each time we will remove
+//* 			only the first flight again and again. This is way it is not
+//* 			necessary to link the list again. 
 //* Parameters:
 //* Return Value:
 //*************************************************************************
 
 Result removeFlight(*RUNWAY runway, int flight_num)
 {
+	if (runway == NULL || runway->first_flight == NULL ||  is_num_valid(flight_num) == 0)
+		return FAILURE;
+	
+	FLIGHT_ITEM* temp_flight;
+	temp_flight = runway->first_flight;
 	
 	
+	
+	
+/* 	if (temp_flight->this_flight->flight_num == flight_num)
+	{
+		destroyFlight(temp_flight->this_flight);
+		runway->first_flight = temp_flight->next_flight_item;
+		free(temp_flight);
+		return SUCCESS;
+	}
+	
+	return FAILURE; */
+
+	
+/* 	while (temp_flight_item != NULL)
+	{
+		if (compare_flight_num(temp_flight_item->this_flight, flight_num) == TRUE)
+			
+			return TRUE;
+		temp_flight_item = temp_flight_item->next_flight_item;
+	} */
+	//return FAILURE;
 }
 
 //*************************************************************************
@@ -148,6 +188,8 @@ Result removeFlight(*RUNWAY runway, int flight_num)
 
 Result depart (*RUNWAY runway)
 {
+	if (runway == NULL || runway->first_flight == NULL)
+		return FAILURE;
 	
 	
 }

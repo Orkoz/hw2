@@ -162,3 +162,13 @@ bool is_emergency_valid(BOOL emergency){
 	fprintf(stderr, "Invalid input emergency parameter.\n Please enter either TRUE or FALSE\n");
 	return 0;
 }
+
+bool compare_flight_num(FLIGHT* flight,int flight_num){
+	if (flight->flight_num == flight_num)
+	{
+		return TRUE;
+	} else
+	{
+		return FALSE;
+	}
+}
