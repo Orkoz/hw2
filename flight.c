@@ -83,7 +83,7 @@ void printFlight(FLIGHT* flight){
 	char type = D;
 	if (emergency==TRUE) emg = E;
 	if (FlightType==INTERNATIONAL) type = I;
-	printf("Flight %n %d %s %d", flight->flight_num,type,flight->destination,emg);
+	printf("Flight %n %d %s %d/n", flight->flight_num,type,flight->destination,emg);
 }
 
 //*************************************************************************
@@ -161,4 +161,14 @@ bool is_emergency_valid(BOOL emergency){
 	
 	fprintf(stderr, "Invalid input emergency parameter.\n Please enter either TRUE or FALSE\n");
 	return 0;
+}
+
+bool compare_flight_num(FLIGHT* flight,int flight_num){
+	if (flight->flight_num == flight_num)
+	{
+		return TRUE;
+	} else
+	{
+		return FALSE;
+	}
 }

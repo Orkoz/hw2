@@ -16,7 +16,7 @@ Result addFlightToAirport{int flight_num, FlightType flight_type, char destinati
 Result departFromRunway{int runway_num, int number_of_flights);
 Result changeDest{char destination[],char new_destination[]);
 Result delay{char destination[]);
-void printAirport{)
+void printAirport{);
 void destroyAirport();
 
 #endif /* AIRPOET_H_*/
