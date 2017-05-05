@@ -8,6 +8,7 @@
 #include "stdlib.h"
 
 typedef struct airport_t AIRPORT;
+typedef struct runway_l RUNWAY_L;
 
 Result addRunway{int runway_num, FlightType runway_type);
 Result removeRunway{int runway_num);

@@ -16,7 +16,7 @@ typedef struct flight_t{
 	FlightType flight_type;
 	char destination[DEST_CHAR_NUM];
 	BOOL emergency;
-	struct FLIGHT* pNext;
+	FLIGHT* pNext;
 }FLIGHT;
 
 
@@ -37,7 +37,7 @@ FLIGHT* createFlight(int flight_num, FlightType flight_type, char destination[],
 	
 	if (valid){
 		FLIGHT* temp_flight = (FLIGHT*)malloc(sizeof(FLIGHT));
-		if (temp_flight){
+		if (temp_flight != NULL){
 			temp_flight->flight_num=flight_num;
 			temp_flight->flight_type=flight_type;
 			strcpy(temp_flight->destination,destination);
