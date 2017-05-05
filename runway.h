@@ -1,7 +1,10 @@
 #ifndef RUNWAY_H_
 #define RUNWAY_H_
 
-#include "AirPort_Include_File.h"
+#include "ex2.h"
+#include "flight.h"
+#include "stdio.h"
+#include "stdlib.h"
 
 typedef struct runway_t RUNWAY;
 
