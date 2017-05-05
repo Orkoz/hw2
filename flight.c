@@ -83,7 +83,7 @@ void printFlight(FLIGHT* flight){
 	char type = D;
 	if (emergency==TRUE) emg = E;
 	if (FlightType==INTERNATIONAL) type = I;
-	printf("Flight %n %d %s %d", flight->flight_num,type,flight->destination,emg);
+	printf("Flight %n %d %s %d/n", flight->flight_num,type,flight->destination,emg);
 }
 
 //*************************************************************************

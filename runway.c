@@ -139,10 +139,6 @@ Result addFlight (*RUNWAY runway, *FLIGHT flight)
 //*************************************************************************
 //* Function name:
 //* Description:
-//* 			The only part in the program we need to remove a flight is when
-//* 			we destroy the airport. In that case each time we will remove
-//* 			only the first flight again and again. This is way it is not
-//* 			necessary to link the list again. 
 //* Parameters:
 //* Return Value:
 //*************************************************************************
@@ -155,10 +151,8 @@ Result removeFlight(*RUNWAY runway, int flight_num)
 	FLIGHT_ITEM* temp_flight;
 	temp_flight = runway->first_flight;
 	
-	
-	
-	
-/* 	if (temp_flight->this_flight->flight_num == flight_num)
+	// Dealing with the first item in the list
+	if (temp_flight->this_flight->flight_num == flight_num)
 	{
 		destroyFlight(temp_flight->this_flight);
 		runway->first_flight = temp_flight->next_flight_item;
@@ -166,17 +160,22 @@ Result removeFlight(*RUNWAY runway, int flight_num)
 		return SUCCESS;
 	}
 	
-	return FAILURE; */
-
+	// Dealing with mid or end of the list
 	
-/* 	while (temp_flight_item != NULL)
+	FLIGHT_ITEM* temp_flight_next;
+	temp_flight_next = runway->first_flight->next_flight_item;
+	
+	while (temp_flight_next != NULL)
 	{
-		if (compare_flight_num(temp_flight_item->this_flight, flight_num) == TRUE)
-			
-			return TRUE;
-		temp_flight_item = temp_flight_item->next_flight_item;
-	} */
-	//return FAILURE;
+		if (temp_flight_next->this_flight->flight_num == flight_num)
+		{
+			destroyFlight(temp_flight_next->this_flight);
+			temp_flight->next_flight_item = temp_flight_next->next_flight_item;
+			free(temp_flight_next);
+			return SUCCESS;
+		}
+		
+	}
 }
 
 //*************************************************************************
@@ -190,7 +189,10 @@ Result depart (*RUNWAY runway)
 {
 	if (runway == NULL || runway->first_flight == NULL)
 		return FAILURE;
-	
+	int flight_num;
+	flight_num = runway->first_flight->this_flight->flight_num;
+	removeFlight(runway, flight_num);
+	return SUCCESS;
 	
 }
 
@@ -203,6 +205,24 @@ Result depart (*RUNWAY runway)
 
 void printRunway (*RUNWAY runway)
 {
+	int flight_num;
+	flight_num = getFlightNum(runway);
+	printf("Runway %n ", runway->runway_num);
+	if (runway->runway_type == INTERNATIONAL)
+	{
+		printf("international/n");
+	} else
+	{
+		printf("domestic/n");
+	}
+	printf("%n flights are waiting:/n", flight_num);
 	
+	FLIGHT_ITEM* flight = runway->first_flight;
+	while (flight_num != 0)
+	{
+		printFlight(flight->this_flight);
+		flight = flight->next_flight_item;
+		flight_num--;
+	}
 	
 }
