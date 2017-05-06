@@ -1,11 +1,20 @@
 #ifndef AIRPOET_H_
 #define AIRPOET_H_
 
+#ifndef EX2_H_
 #include "ex2.h"
+#endif
+
+#ifndef RUNWAY_H_
 #include "runway.h"
+#endif
+
+#ifndef FLIGHT_H_
 #include "flight.h"
-#include "stdio.h"
-#include "stdlib.h"
+#endif
+
+//#include "stdio.h"
+//#include "stdlib.h"
 
 typedef struct airport_t AIRPORT;
 typedef struct runway_l RUNWAY_L;
@@ -18,6 +27,8 @@ Result changeDest{char destination[],char new_destination[]);
 Result delay{char destination[]);
 void printAirport{);
 void destroyAirport();
+
+bool runway_num_exists(int runway_num);
 
 #endif /* AIRPOET_H_*/
 

@@ -4,9 +4,12 @@
 #ifndef FLIGHT_H_
 #define FLIGHT_H_
 
+#ifndef EX2_H_
 #include "ex2.h"
-#include "stdio.h"
-#include "stdlib.h"
+#endif
+
+//#include "stdio.h"
+//#include "stdlib.h"
 
 typedef struct flight_t FLIGHT;
 
