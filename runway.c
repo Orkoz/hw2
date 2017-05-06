@@ -5,10 +5,21 @@
 //* Return Value:
 //*************************************************************************
 
+#ifndef STDIO_H_
 #include <stdio.h>
+#endif
+
+#ifndef STDLIB_H_
 #include <stdlib.h>
+#endif
+
+#ifndef EX2_H_
 #include "ex2.h"
+#endif
+
+#ifndef FLIGHT_H_
 #include "flight.h"
+#endif
 
 /*
 typedef יוצר קיצור של טיפוס מורכב
