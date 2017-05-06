@@ -104,9 +104,87 @@ Result removeRunway{int runway_num){
 	return FAILURE;
 }
 
-Result addFlightToAirport{int flight_num, FlightType flight_type, char destination[], BOOL emergency);
+Result addFlightToAirport{int flight_num, FlightType flight_type, char destination[], BOOL emergency)
+	{
+		if (airport->runway_list == NULL)
+			return FAILURE;
+		
+		//  creating flight, checking parameters in module flight
+		FLIGHT* flight = createFlight(flight_num, flight_type, destination, emergency);
+		if (flight == NULL)
+			return FAILURE;
+		
+
+		// Going through every runway checking if flight num exists
+		// Also checking for the runway with minimal flights in list
+		RUNWAY_ITEM* temp_runway_item = airport->runway_list;
+		int counter = 0;
+		RUNWAY_ITEM* minimal_flights_runway = NULL;
+		
+		while (temp_runway_item != NULL)
+		{
+			// Checking for same flight number
+			if (isFlightExists(temp_runway_item->runway, flight_num) == TRUE)
+			{
+				destroyFlight(flight);
+				return FAILURE;
+			}
+			
+			// Checking for minimal flights in runway list
+			if (temp_runway_item->runway->runway_type == flight_type)
+			{
+				if (minimal_flights_runway == NULL)
+				{
+					minimal_flights_runway = temp_runway_item;
+					counter = getFlightNum(minimal_flights_runway->runway);
+				} else
+				{
+					if (getFlightNum(temp_runway_item->runway) < counter)
+					{
+						minimal_flights_runway = temp_runway_item;
+						counter = getFlightNum(minimal_flights_runway->runway);
+					}
+				}
+			}
+			temp_runway_item = temp_runway_item->next_runway;
+		}
+		
+		if (addFlight(minimal_flights_runway->runway, flight) == SUCCESS)
+		{
+			destroyFlight(flight);
+			return SUCCESS;
+		} else
+		{
+			destroyFlight(flight);
+			return FAILURE;
+		}
+	}
+
 Result departFromRunway{int runway_num, int number_of_flights);
 Result changeDest{char destination[],char new_destination[]);
 Result delay{char destination[]);
-void printAirport{)
-void destroyAirport();
+
+void printAirport()
+{
+	printf("Airport status:/n");
+	RUNWAY_ITEM* temp_runway_item = airport->runway_list;
+	while (temp_runway_item != NULL)
+	{
+		printRunway(temp_runway_item->runway);
+		temp_runway_item = temp_runway_item->next_runway;
+	}
+}
+
+void destroyAirport()
+{
+	RUNWAY_ITEM* deleted_runway_item = airport->runway_list;
+	RUNWAY_ITEM* temp_runway_item = NULL;
+	while (deleted_runway_item != NULL)
+	{
+		destroyRunway (deleted_runway_item->runway);
+		temp_runway_item = deleted_runway_item;
+		deleted_runway_item = deleted_runway_item->next_runway;
+		free(temp_runway_item);
+	}
+	free(airport);
+}

@@ -46,8 +46,8 @@ typedef struct flight_t{
 //*************************************************************************
 
 FLIGHT* createFlight(int flight_num, FlightType flight_type, char destination[], BOOL emergency){
-	// לדעתי הבדיקות הנ"ל צריכות להיות בשלב קריאת הפלט ז"א במודול שדה תעופה
-	//bool valid = is_num_valid(flight_num) && is_type_valid(flight_type) && is_destination_valid(destination) && is_emergency_valid(emergency);
+
+	bool valid = is_num_valid(flight_num) && is_type_valid(flight_type) && is_destination_valid(destination) && is_emergency_valid(emergency);
 	
 	if (valid){
 		FLIGHT* temp_flight = (FLIGHT*)malloc(sizeof(FLIGHT));

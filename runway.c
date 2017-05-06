@@ -152,7 +152,7 @@ Result addFlight (*RUNWAY runway, *FLIGHT flight)
 		return FAILURE;
 	
 	// creating a copy of the flight
-	flight_copy = createFlight(flight->flight_num, flight->flight_type, flight->destination, flight->emergency);
+	FLIGHT* flight_copy = createFlight(flight->flight_num, flight->flight_type, flight->destination, flight->emergency);
 	// creating a new flight item for the liked list
 	FLIGHT_ITEM* new_flight_item = (FLIGHT_ITEM*)malloc(sizeof(FLIGHT_ITEM));
 	if (flight_copy == NULL || new_flight_item == NULL)
