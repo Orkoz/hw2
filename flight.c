@@ -5,18 +5,32 @@
 //* Return Value:
 //*************************************************************************
 
+#ifndef EX2_H_
 #include "ex2.h"
+#endif
+
+#ifndef FLIGHT_H_
 #include "flight.h"
-#include "string.h"
-#include "stdio.h"
-#include "stdlib.h"
+#endif
+
+#ifndef STRING_H_
+#include <string.h>
+#endif
+
+#ifndef STDIO_H_
+#include <stdio.h>
+#endif
+
+#ifndef STDLIB_H_
+#include <stdlib.h>
+#endif
 
 typedef struct flight_t{
 	int flight_num;
 	FlightType flight_type;
 	char destination[DEST_CHAR_NUM];
 	BOOL emergency;
-	FLIGHT* pNext;
+	//FLIGHT* pNext;
 }FLIGHT;
 
 
@@ -32,7 +46,7 @@ typedef struct flight_t{
 //*************************************************************************
 
 FLIGHT* createFlight(int flight_num, FlightType flight_type, char destination[], BOOL emergency){
-	
+
 	bool valid = is_num_valid(flight_num) && is_type_valid(flight_type) && is_destination_valid(destination) && is_emergency_valid(emergency);
 	
 	if (valid){
@@ -45,7 +59,6 @@ FLIGHT* createFlight(int flight_num, FlightType flight_type, char destination[],
 			return temp_flight;
 		}
 	}
-
 	return NULL;
 }
 
@@ -59,14 +72,14 @@ FLIGHT* createFlight(int flight_num, FlightType flight_type, char destination[],
 //*************************************************************************
 
 void destroyFlight(FLIGHT* flight){
-	FLIGHT* temp_flight = flight->pNext;
-	*flight=*temp_flight;
+	//FLIGHT* temp_flight = flight->pNext;
+	//*flight=*temp_flight;
 	// in case *flight=*temp_flight dont work:
 		// flight->flight_num=temp_flight->flight_num;
 		// flight->flight_type=temp_flight->flight_type;
 		// flight->destination=temp_flight->destination;
 		// flight->emergency=temp_flight->emergency;
-	free(temp_flight);
+	free(flight);
 }
 
 
@@ -79,11 +92,13 @@ void destroyFlight(FLIGHT* flight){
 //*************************************************************************
 
 void printFlight(FLIGHT* flight){
-	char emg = R;
-	char type = D;
-	if (emergency==TRUE) emg = E;
-	if (FlightType==INTERNATIONAL) type = I;
-	printf("Flight %n %d %s %d", flight->flight_num,type,flight->destination,emg);
+	char emg = 'R';
+	char type = 'D';
+	if (flight->emergency==TRUE)
+		emg = 'E';
+	if (flight->flight_type==INTERNATIONAL) 
+		type = 'I';
+	printf("Flight %n %d %s %d/n", flight->flight_num,type,flight->destination,emg);
 }
 
 //*************************************************************************
@@ -96,10 +111,10 @@ void printFlight(FLIGHT* flight){
 
 bool is_num_valid(int num){
 	if (num >= 1 && num <= MAX_ID)
-		return 1;
+		return TRUE;
 	
-	fprintf(stderr, "Invalid input number.\n Please enter a number between 1 to %d\n", MAX_ID);
-	return 0;
+	//fprintf(stderr, "Invalid input number.\n Please enter a number between 1 to %d\n", MAX_ID);
+	return FALSE;
 }
 
 
@@ -113,10 +128,10 @@ bool is_num_valid(int num){
 
 bool is_type_valid(FlightType type){
 	if (type == DOMESTIC || type == INTERNATIONAL)
-		return 1;
+		return TRUE;
 	
-	fprintf(stderr, "Invalid input type.\n Please enter either DOMESTIC or INTERNATIONAL\n");
-	return 0;
+	//fprintf(stderr, "Invalid input type.\n Please enter either DOMESTIC or INTERNATIONAL\n");
+	return FALSE;
 }
 
 
@@ -132,18 +147,18 @@ bool is_destination_valid(char destination[]){
 	length = strlen(destination);
 	
 	if (length != 3){
-		fprintf(stderr, "Invalid input destination.\n Please enter destination length in 3 charters\n");
-		return 0;
+		//fprintf(stderr, "Invalid input destination.\n Please enter destination length in 3 charters\n");
+		return FALSE;
 	}
 	
     for (i=0;i<length;i++){
 		if((destination[i] < 'A' && destination[i] > 'Z')) {
-			fprintf(stderr, "Invalid input destination.\n Please enter destination in capital letters\n");
-			return 0;
+			//fprintf(stderr, "Invalid input destination.\n Please enter destination in capital letters\n");
+			return FALSE;
 		}
 	}
 	
-	return 1;
+	return TRUE;
 }
 
 
@@ -157,8 +172,18 @@ bool is_destination_valid(char destination[]){
 
 bool is_emergency_valid(BOOL emergency){
 	if (emergency == TRUE || emergency == FALSE)
-		return 1;
+		return TRUE;
 	
-	fprintf(stderr, "Invalid input emergency parameter.\n Please enter either TRUE or FALSE\n");
-	return 0;
+	//fprintf(stderr, "Invalid input emergency parameter.\n Please enter either TRUE or FALSE\n");
+	return FALSE;
+}
+
+bool compare_flight_num(FLIGHT* flight,int flight_num){
+	if (flight->flight_num == flight_num)
+	{
+		return TRUE;
+	} else
+	{
+		return FALSE;
+	}
 }

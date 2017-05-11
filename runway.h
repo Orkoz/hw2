@@ -1,10 +1,16 @@
 #ifndef RUNWAY_H_
 #define RUNWAY_H_
 
+#ifndef EX2_H_
 #include "ex2.h"
+#endif
+
+#ifndef FLIGHT_H_
 #include "flight.h"
-#include "stdio.h"
-#include "stdlib.h"
+#endif
+
+//#include "stdio.h"
+//#include "stdlib.h"
 
 typedef struct runway_t RUNWAY;
 typedef struct flight_item FLIGHT_ITEM;
