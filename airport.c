@@ -173,7 +173,7 @@ Result addFlightToAirport(int flight_num, FlightType flight_type, char destinati
 			temp_runway_item = temp_runway_item->next_runway;
 		}
 		
-		if (addFlight(minimal_flights_runway->runway, flight) == SUCCESS)
+		if (minimal_flights_runway!= NULL && addFlight(minimal_flights_runway->runway, flight) == SUCCESS)
 		{
 			destroyFlight(flight);
 			return SUCCESS;
@@ -208,19 +208,19 @@ Result changeDest(char destination[],char new_destination[]){
 	while (temp_runway_item != NULL){
 		FLIGHT* temp_flight = isFlightDest(temp_runway_item->runway, destination);
 		while (temp_flight != NULL) {
-			change_flight_dest(temp_flight, destination);
+			change_flight_dest(temp_flight, new_destination);
 			temp_flight = isFlightDest(temp_runway_item->runway, destination);
 		}
 		temp_runway_item = temp_runway_item->next_runway;
 	}
-
 	return SUCCESS;
-
 }
 
 Result delay(char destination[]){
 	if (!(is_destination_valid(destination)))
 		return FAILURE;
+	if (airport->runway_list == NULL)
+		return SUCCESS;
 
 	RUNWAY_ITEM* temp_runway_item = airport->runway_list;
 	RUNWAY* temp_runway = createRunway(get_runway_num(temp_runway_item->runway), get_runway_type(temp_runway_item->runway));

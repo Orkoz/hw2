@@ -38,7 +38,7 @@ enum מייצר טיפוס חדש
 typedef struct runway_t{
 	int runway_num;
 	FlightType runway_type;
-	FLIGHT_ITEM* first_flight; // not sure this is the right notation
+	FLIGHT_ITEM* first_flight; 
 }	RUNWAY;
 
 typedef struct flight_item{
@@ -121,7 +121,7 @@ BOOL isFlightExists (RUNWAY* runway, int flight_num)
 }
 
 FLIGHT* isFlightDest(RUNWAY* runway, char dest[]){
-	if (runway == NULL || is_destination_valid(dest) == 0)
+	if (runway == NULL || is_destination_valid(dest) == FALSE)
 		return NULL;
 
 	FLIGHT_ITEM* temp_flight_item = runway->first_flight;
@@ -176,7 +176,7 @@ Result addFlight (RUNWAY* runway, FLIGHT* flight)
 		return FAILURE;
 	
 	// creating a copy of the flight
-	char dest[DEST_CHAR_NUM];
+	char dest[DEST_CHAR_NUM+1];
 	strcpy(dest, get_flight_dest(flight));
 	FLIGHT* flight_copy = createFlight(get_flight_num(flight), get_flight_type(flight), dest, get_flight_emerg(flight));
 	// creating a new flight item for the liked list
@@ -187,12 +187,17 @@ Result addFlight (RUNWAY* runway, FLIGHT* flight)
 	new_flight_item->this_flight = flight_copy;
 	new_flight_item->next_flight_item = NULL;
 	
+	// dealing the case where there are no flights in the list yet
+	if (runway->first_flight == NULL)
+	{
+		runway->first_flight = new_flight_item;
+		return SUCCESS;
+	}
+
 	// creating a temp pointer for the loop
 	FLIGHT_ITEM* temp_flight_item = runway->first_flight;
 	
-	// dealing the case where there are no flights in the list
-	if (temp_flight_item == NULL)
-		runway->first_flight = new_flight_item;
+
 	
 	// dealing with emergency flights
 	if (get_flight_emerg(flight_copy) == TRUE)
@@ -204,7 +209,7 @@ Result addFlight (RUNWAY* runway, FLIGHT* flight)
 			runway->first_flight = new_flight_item;
 		} else 
 		{		// Dealing with mid or end of the list
-			while (get_flight_emerg(temp_flight_item->next_flight_item->this_flight) == TRUE)
+			while (temp_flight_item->next_flight_item != NULL && get_flight_emerg(temp_flight_item->next_flight_item->this_flight) == TRUE)
 			{
 				temp_flight_item = temp_flight_item->next_flight_item;
 			}
