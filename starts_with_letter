@@ -1,0 +1,21 @@
+############################################################################################################
+# Script name: Start with letter
+# Description: The script shows the number of files in the directory and all its sub directories that start with the letter that was given
+# Parameters: - directory – the directory the which will be searched
+#             -letter – the directory the which will be searched
+# Return value: print the number of files.
+############################################################################################################
+
+#! /bin/bash
+
+if [[ $# != 2 ]]; then
+	echo "Not enough parameters. usage: dirName latter"
+	exit 1
+fi
+
+if [ ! -d $1 ]; then
+  echo "Directory does not exist"
+  exit 1
+fi
+
+ ls -p -R $1 | grep -v / | grep -i $2 |wc -l
