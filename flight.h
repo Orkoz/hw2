@@ -22,5 +22,8 @@ bool is_type_valid(FlightType type);
 bool is_destination_valid(char destination[]);
 bool is_emergency_valid(BOOL emergency);
 bool compare_flight_num(FLIGHT* flight,int flight_num);
+bool compare_flight_dest(FLIGHT* flight, char destination[]);
+void change_flight_dest(FLIGHT* flight, char destination[]);
+int get_flight_num(FLIGHT* flight);
 
 #endif /* FLIGHT_H_*/

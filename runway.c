@@ -111,6 +111,21 @@ bool isFlightExists (*RUNWAY runway, int flight_num)
 	return FALSE;
 }
 
+FLIGHT* isFlightDest(RUNWAY* runway, char* dest[]){
+	if (runway == NULL || is_destination_valid(dest) == 0)
+		return NULL;
+
+	FLIGHT_ITEM* temp_flight_item = runway->first_flight;
+
+	while (temp_flight_item != NULL)
+	{
+		if (compare_flight_dest(temp_flight_item->this_flight, dest))
+			return temp_flight_item->this_flight;
+		temp_flight_item = temp_flight_item->next_flight_item;
+	}
+	return NULL;
+}
+
 //*************************************************************************
 //* Function name:
 //* Description:
@@ -263,8 +278,7 @@ Result depart (*RUNWAY runway)
 //* Return Value:
 //*************************************************************************
 
-void printRunway (*RUNWAY runway)
-{
+void printRunway (*RUNWAY runway){
 	int flight_num;
 	flight_num = getFlightNum(runway);
 	printf("Runway %n ", runway->runway_num);
@@ -284,5 +298,13 @@ void printRunway (*RUNWAY runway)
 		flight = flight->next_flight_item;
 		flight_num--;
 	}
-	
+}
+
+int get_runway_num(RUNWAY* runway){
+
+	return runway->runway_num;
+}
+
+FlightType get_runway_type(RUNWAY* runway){
+	return runway->runway_type;
 }
