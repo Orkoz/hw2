@@ -207,3 +207,16 @@ void change_flight_dest(FLIGHT* flight, char destination[]){
 int get_flight_num(FLIGHT* flight){
 	return flight->flight_num;
 }
+
+FlightType get_flight_type(FLIGHT* flight)
+{
+	return flight->flight_type;
+}
+char* get_flight_dest(FLIGHT* flight)
+{
+	return flight->destination;
+}
+BOOL get_flight_emerg(FLIGHT* flight)
+{
+	return flight->emergency;
+}

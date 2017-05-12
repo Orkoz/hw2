@@ -13,6 +13,10 @@
 #include <stdlib.h>
 #endif
 
+#ifndef STRING_H_
+#include <string.h>
+#endif
+
 #ifndef EX2_H_
 #include "ex2.h"
 #endif
@@ -30,10 +34,11 @@ typedef יוצר קיצור של טיפוס מורכב
 enum מייצר טיפוס חדש
 */
 
+
 typedef struct runway_t{
 	int runway_num;
 	FlightType runway_type;
-	struct FLIGHT_ITEM* first_flight; // not sure this is the right notation
+	FLIGHT_ITEM* first_flight; // not sure this is the right notation
 }	RUNWAY;
 
 typedef struct flight_item{
@@ -101,7 +106,7 @@ void destroyRunway (RUNWAY* runway)
 
 BOOL isFlightExists (RUNWAY* runway, int flight_num)
 {
-	if (runway == NULL) || is_num_valid(flight_num) == FALSE)
+	if (runway == NULL || is_num_valid(flight_num) == FALSE)
 		return FALSE;
 	FLIGHT_ITEM* temp_flight_item;
 	temp_flight_item = runway->first_flight;
@@ -115,7 +120,7 @@ BOOL isFlightExists (RUNWAY* runway, int flight_num)
 	return FALSE;
 }
 
-FLIGHT* isFlightDest(RUNWAY* runway, char* dest[]){
+FLIGHT* isFlightDest(RUNWAY* runway, char dest[]){
 	if (runway == NULL || is_destination_valid(dest) == 0)
 		return NULL;
 
@@ -163,15 +168,17 @@ int getFlightNum (RUNWAY* runway)
 Result addFlight (RUNWAY* runway, FLIGHT* flight)
 {
 	// checking pointers
-	if (runway ==NULL || flight == NULL)
+	if (runway == NULL || flight == NULL)
 		return FAILURE;
 	
 	// checking runway type and if same flight num exists
-	if (runway->runway_type != flight->flight_type || isFlightExists (runway, flight->flight_num) == TRUE)
+	if (runway->runway_type != get_flight_type(flight) || isFlightExists(runway, get_flight_num(flight)) == TRUE)
 		return FAILURE;
 	
 	// creating a copy of the flight
-	FLIGHT* flight_copy = createFlight(flight->flight_num, flight->flight_type, flight->destination, flight->emergency);
+	char dest[DEST_CHAR_NUM];
+	strcpy(dest, get_flight_dest(flight));
+	FLIGHT* flight_copy = createFlight(get_flight_num(flight), get_flight_type(flight), dest, get_flight_emerg(flight));
 	// creating a new flight item for the liked list
 	FLIGHT_ITEM* new_flight_item = (FLIGHT_ITEM*)malloc(sizeof(FLIGHT_ITEM));
 	if (flight_copy == NULL || new_flight_item == NULL)
@@ -188,16 +195,16 @@ Result addFlight (RUNWAY* runway, FLIGHT* flight)
 		runway->first_flight = new_flight_item;
 	
 	// dealing with emergency flights
-	if (flight_copy->emergency == TRUE)
+	if (get_flight_emerg(flight_copy) == TRUE)
 	{
 		// Dealing with the first item in the list
-		if (temp_flight_item->this_flight->emergency == FALSE)
+		if (get_flight_emerg(temp_flight_item->this_flight) == FALSE)
 		{
 			new_flight_item->next_flight_item = temp_flight_item;
 			runway->first_flight = new_flight_item;
 		} else 
 		{		// Dealing with mid or end of the list
-			while (temp_flight_item->next_flight_item->this_flight->emergency == TRUE)
+			while (get_flight_emerg(temp_flight_item->next_flight_item->this_flight) == TRUE)
 			{
 				temp_flight_item = temp_flight_item->next_flight_item;
 			}
@@ -231,7 +238,7 @@ Result removeFlight(RUNWAY* runway, int flight_num)
 	temp_flight = runway->first_flight;
 	
 	// Dealing with the first item in the list
-	if (temp_flight->this_flight->flight_num == flight_num)
+	if (get_flight_num(temp_flight->this_flight) == flight_num)
 	{
 		destroyFlight(temp_flight->this_flight);
 		runway->first_flight = temp_flight->next_flight_item;
@@ -246,7 +253,7 @@ Result removeFlight(RUNWAY* runway, int flight_num)
 	
 	while (temp_flight_next != NULL)
 	{
-		if (temp_flight_next->this_flight->flight_num == flight_num)
+		if (get_flight_num(temp_flight_next->this_flight) == flight_num)
 		{
 			destroyFlight(temp_flight_next->this_flight);
 			temp_flight->next_flight_item = temp_flight_next->next_flight_item;
@@ -269,7 +276,7 @@ Result depart (RUNWAY* runway)
 	if (runway == NULL || runway->first_flight == NULL)
 		return FAILURE;
 	int flight_num;
-	flight_num = runway->first_flight->this_flight->flight_num;
+	flight_num = get_flight_num(runway->first_flight->this_flight);
 	removeFlight(runway, flight_num);
 	return SUCCESS;
 	
@@ -287,7 +294,7 @@ void printRunway (RUNWAY* runway)
 {
 	int flight_num;
 	flight_num = getFlightNum(runway);
-	printf("Runway %n ", runway->runway_num);
+	printf("Runway %d ", runway->runway_num);
 	if (runway->runway_type == INTERNATIONAL)
 	{
 		printf("international/n");
@@ -295,7 +302,7 @@ void printRunway (RUNWAY* runway)
 	{
 		printf("domestic/n");
 	}
-	printf("%n flights are waiting:/n", flight_num);
+	printf("%d flights are waiting:/n", flight_num);
 	
 	FLIGHT_ITEM* flight = runway->first_flight;
 	while (flight_num != 0)
