@@ -18,8 +18,7 @@
 
 typedef struct airport_t AIRPORT;
 typedef struct runway_item RUNWAY_ITEM;
-
-Result addRunway(FlightType runway_type, int runway_num);
+Result addRunway(int runway_num, FlightType runway_type);
 Result removeRunway(int runway_num);
 Result addFlightToAirport(int flight_num, FlightType flight_type, char destination[], BOOL emergency);
 Result departFromRunway(int runway_num, int number_of_flights);

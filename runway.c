@@ -21,6 +21,10 @@
 #include "flight.h"
 #endif
 
+#ifndef RUNWAY_H_
+#include "runway.h"
+#endif
+
 /*
 typedef יוצר קיצור של טיפוס מורכב
 enum מייצר טיפוס חדש
@@ -66,7 +70,7 @@ RUNWAY* createRunway (int runway_num, FlightType runway_type)
 //* Return Value:
 //*************************************************************************
 
-void destroyRunway (*RUNWAY runway)
+void destroyRunway (RUNWAY* runway)
 {
 	// Do we need to check input vars here or in main?
 	if (runway == NULL)
@@ -95,9 +99,9 @@ void destroyRunway (*RUNWAY runway)
 //* Return Value:
 //*************************************************************************
 
-bool isFlightExists (*RUNWAY runway, int flight_num)
+BOOL isFlightExists (RUNWAY* runway, int flight_num)
 {
-	if (runway == NULL || is_num_valid(flight_num) == 0)
+	if (runway == NULL) || is_num_valid(flight_num) == FALSE)
 		return FALSE;
 	FLIGHT_ITEM* temp_flight_item;
 	temp_flight_item = runway->first_flight;
@@ -133,7 +137,7 @@ FLIGHT* isFlightDest(RUNWAY* runway, char* dest[]){
 //* Return Value:
 //*************************************************************************
 
-int getFlightNum (*RUNWAY runway)
+int getFlightNum (RUNWAY* runway)
 {
 	if (runway == NULL)
 		return -1;
@@ -156,7 +160,7 @@ int getFlightNum (*RUNWAY runway)
 //* Return Value:
 //*************************************************************************
 
-Result addFlight (*RUNWAY runway, *FLIGHT flight)
+Result addFlight (RUNWAY* runway, FLIGHT* flight)
 {
 	// checking pointers
 	if (runway ==NULL || flight == NULL)
@@ -174,7 +178,7 @@ Result addFlight (*RUNWAY runway, *FLIGHT flight)
 		return FAILURE;
 	
 	new_flight_item->this_flight = flight_copy;
-	new_flight_item-next_flight_item = NULL;
+	new_flight_item->next_flight_item = NULL;
 	
 	// creating a temp pointer for the loop
 	FLIGHT_ITEM* temp_flight_item = runway->first_flight;
@@ -218,9 +222,9 @@ Result addFlight (*RUNWAY runway, *FLIGHT flight)
 //* Return Value:
 //*************************************************************************
 
-Result removeFlight(*RUNWAY runway, int flight_num)
+Result removeFlight(RUNWAY* runway, int flight_num)
 {
-	if (runway == NULL || runway->first_flight == NULL ||  is_num_valid(flight_num) == 0)
+	if (runway == NULL || runway->first_flight == NULL || is_num_valid(flight_num) == FALSE)
 		return FAILURE;
 	
 	FLIGHT_ITEM* temp_flight;
@@ -260,7 +264,7 @@ Result removeFlight(*RUNWAY runway, int flight_num)
 //* Return Value:
 //*************************************************************************
 
-Result depart (*RUNWAY runway)
+Result depart (RUNWAY* runway)
 {
 	if (runway == NULL || runway->first_flight == NULL)
 		return FAILURE;
@@ -278,7 +282,9 @@ Result depart (*RUNWAY runway)
 //* Return Value:
 //*************************************************************************
 
-void printRunway (*RUNWAY runway){
+
+void printRunway (RUNWAY* runway)
+{
 	int flight_num;
 	flight_num = getFlightNum(runway);
 	printf("Runway %n ", runway->runway_num);
