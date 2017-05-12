@@ -262,6 +262,7 @@ Result removeFlight(RUNWAY* runway, int flight_num)
 		}
 		
 	}
+	return FAILURE;
 }
 
 //*************************************************************************
@@ -297,12 +298,12 @@ void printRunway (RUNWAY* runway)
 	printf("Runway %d ", runway->runway_num);
 	if (runway->runway_type == INTERNATIONAL)
 	{
-		printf("international/n");
+		printf("international\n");
 	} else
 	{
-		printf("domestic/n");
+		printf("domestic\n");
 	}
-	printf("%d flights are waiting:/n", flight_num);
+	printf("%d flights are waiting:\n", flight_num);
 	
 	FLIGHT_ITEM* flight = runway->first_flight;
 	while (flight_num != 0)

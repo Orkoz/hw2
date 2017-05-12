@@ -100,7 +100,7 @@ void printFlight(FLIGHT* flight){
 		emg = 'E';
 	if (flight->flight_type==INTERNATIONAL) 
 		type = 'I';
-	printf("Flight %i %d %s %d/n", flight->flight_num,type,flight->destination,emg);
+	printf("Flight %i %d %s %d\n", flight->flight_num,type,flight->destination,emg);
 }
 
 //*************************************************************************
@@ -190,7 +190,7 @@ BOOL compare_flight_num(FLIGHT* flight,int flight_num){
 	}
 }
 
-bool compare_flight_dest(FLIGHT* flight, char destination[]){
+BOOL compare_flight_dest(FLIGHT* flight, char destination[]){
 	if (strcmp(flight->destination, destination))
 	{
 		return FALSE;

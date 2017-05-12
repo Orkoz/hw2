@@ -43,7 +43,11 @@ BOOL create_airport()
 {
 	airport = (AIRPORT*)malloc(sizeof(AIRPORT));
 	if (airport != NULL)
+	{
+		airport->runway_list = NULL;
+		airport->last_runway = NULL;
 		return TRUE;
+	}
 	return FALSE;
 }
 
@@ -59,8 +63,17 @@ Result addRunway(int runway_num, FlightType runway_type) {
 		new_runway_item->runway = new_runway;
 		new_runway_item->next_runway = NULL;
 
-		airport->last_runway->next_runway = new_runway_item;
-		airport->last_runway = new_runway_item;
+		if (airport->runway_list == NULL) // If this is the first runway added
+		{
+			airport->runway_list = new_runway_item;
+			airport->last_runway = new_runway_item;
+		}
+		else
+		{
+			airport->last_runway->next_runway = new_runway_item;
+			airport->last_runway = new_runway_item;
+		}
+
 		return SUCCESS;
 	}
 	return FAILURE;
@@ -237,7 +250,7 @@ Result delay(char destination[]){
 
 void printAirport()
 {
-	printf("Airport status:/n");
+	printf("Airport status:\n");
 	RUNWAY_ITEM* temp_runway_item = airport->runway_list;
 	while (temp_runway_item != NULL)
 	{

@@ -56,16 +56,16 @@ Command select_command(char* command)
 }
 
 // Helper function for checking input
-BOOL chk_emg_and_typ(char par, int type)
+BOOL chk_emg_and_typ(char* par, int type)
 {
 	if (type == EMERGENCY)
 	{
-		if (par == 'E' || par == 'R')
+		if (!strcmp(par,"E") || !strcmp(par, "R"))
 			return TRUE;
 	}
 	else if (type == F_TYPE)
 	{
-		if (par == 'I' || par == 'D')
+		if (!strcmp(par, "I") || !strcmp(par, "D"))
 			return TRUE;
 	}
 	return FALSE;
@@ -106,14 +106,14 @@ int main()
 		case INSERT:
 			if (par1 == NULL || par2 == NULL)
 			{
-				fprintf(stderr, "Insert failed: not enough parameters./n");
+				fprintf(stderr, "Insert failed: not enough parameters.\n");
 				break;
 			}
 
 			runway_num = atoi(par1);
 			if (runway_num == 0 || chk_emg_and_typ(par2, F_TYPE) == FALSE)
 			{
-				fprintf(stderr, "Insert execution failed./n");
+				fprintf(stderr, "Insert execution failed.\n");
 				break;
 			}
 
@@ -121,7 +121,7 @@ int main()
 
 			if (addRunway(runway_num, runway_type) == FAILURE)
 			{
-				fprintf(stderr, "Insert execution failed./n");
+				fprintf(stderr, "Insert execution failed.\n");
 				break;
 			}
 			break;
@@ -129,27 +129,27 @@ int main()
 		case REMOVE:
 			if (par1 == NULL)
 			{
-				fprintf(stderr, "Remove failed: not enough parameters./n");
+				fprintf(stderr, "Remove failed: not enough parameters.\n");
 				break;
 			}
 			runway_num = atoi(par1);
 			if (runway_num == 0 || removeRunway(runway_num) == FAILURE)
 			{
-				fprintf(stderr, "Remove execution failed./n");
+				fprintf(stderr, "Remove execution failed.\n");
 				break;
 			}
 			break;
 		case ADD:
 			if (par1 == NULL || par2 == NULL || par3 == NULL || par4 == NULL)
 			{
-				fprintf(stderr, "Add failed: not enough parameters./n");
+				fprintf(stderr, "Add failed: not enough parameters.\n");
 				break;
 			}
 			int flight_num = atoi(par1);
 
 			if (flight_num == 0 || chk_emg_and_typ(par2, F_TYPE) == FALSE || chk_emg_and_typ(par4, EMERGENCY) == FALSE)
 			{
-				fprintf(stderr, "Add execution failed./n");
+				fprintf(stderr, "Add execution failed.\n");
 				break;
 			}
 
@@ -158,14 +158,14 @@ int main()
 
 			if (addFlightToAirport(flight_num, flight_type, par3, emergency) == FAILURE)
 			{
-				fprintf(stderr, "Add execution failed./n");
+				fprintf(stderr, "Add execution failed.\n");
 				break;
 			}
 			break;
 		case DEPART:
 			if (par1 == NULL || par2 == NULL)
 			{
-				fprintf(stderr, "Depart failed: not enough parameters./n");
+				fprintf(stderr, "Depart failed: not enough parameters.\n");
 				break;
 			}
 			runway_num = atoi(par1);
@@ -173,31 +173,31 @@ int main()
 
 			if (runway_num == 0 || num_of_flights < 0 || departFromRunway(runway_num, num_of_flights) == FAILURE)
 			{
-				fprintf(stderr, "Depart execution failed./n");
+				fprintf(stderr, "Depart execution failed.\n");
 				break;
 			}
 			break;
 		case CHANGE:
 			if (par1 == NULL || par2 == NULL)
 			{
-				fprintf(stderr, "Change failed: not enough parameters./n");
+				fprintf(stderr, "Change failed: not enough parameters.\n");
 				break;
 			}
 			if (changeDest(par1, par2) == FAILURE)
 			{
-				fprintf(stderr, "Change execution failed./n");
+				fprintf(stderr, "Change execution failed.\n");
 				break;
 			}
 			break;
 		case DELAY:
 			if (par1 == NULL)
 			{
-				fprintf(stderr, "Delay failed: not enough parameters./n");
+				fprintf(stderr, "Delay failed: not enough parameters.\n");
 				break;
 			}
 			if (delay(par1) == FAILURE)
 			{
-				fprintf(stderr, "Delay execution failed./n");
+				fprintf(stderr, "Delay execution failed.\n");
 				break;
 			}
 			break;
@@ -208,7 +208,7 @@ int main()
 			destroyAirport();
 			return 0;
 		default:
-			fprintf(stderr, "Command not found./n");
+			fprintf(stderr, "Command not found.\n");
 			break;
 		}
 	}
