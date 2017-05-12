@@ -17,13 +17,13 @@ FLIGHT* createFlight(int flight_num, FlightType flight_type, char destination[],
 void destroyFlight(FLIGHT* flight);
 void printFlight(FLIGHT* flight);
 
-bool is_num_valid(int num);
-bool is_type_valid(FlightType type);
-bool is_destination_valid(char destination[]);
-bool is_emergency_valid(BOOL emergency);
-bool compare_flight_num(FLIGHT* flight,int flight_num);
+
+BOOL is_num_valid(int num);
+BOOL is_destination_valid(char destination[]);
+BOOL compare_flight_num(FLIGHT* flight,int flight_num);
 bool compare_flight_dest(FLIGHT* flight, char destination[]);
 void change_flight_dest(FLIGHT* flight, char destination[]);
 int get_flight_num(FLIGHT* flight);
+
 
 #endif /* FLIGHT_H_*/

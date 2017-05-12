@@ -22,6 +22,10 @@
 #include "flight.h"
 #endif
 
+#ifndef AIRPORT_H_
+#include "airport.h"
+#endif
+
 typedef struct runway_item{
 	RUNWAY* runway;
 	RUNWAY_ITEM* next_runway;
@@ -34,7 +38,9 @@ typedef struct airport_t{
 
 static AIRPORT airport = (AIRPORT)malloc(sizeof(AIRPORT));
 
-Result addRunway(FlightType runway_type, int runway_num){
+
+Result addRunway(int runway_num, FlightType runway_type){
+
 	
 	if (runway_num_exists(runway_num) != NULL)
 		return FAILURE;
@@ -157,6 +163,7 @@ Result addFlightToAirport(int flight_num, FlightType flight_type, char destinati
 		}
 	}
 
+
 Result departFromRunway(int runway_num, int number_of_flights){
 	RUNWAY* temp_runway = runway_num_exists(runway_num);
 
@@ -218,6 +225,7 @@ Result delay(char destination[]){
 	destroyRunway(temp_runway);
 	return SUCCESS;
 }
+
 
 void printAirport()
 {
