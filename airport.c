@@ -22,6 +22,10 @@
 #include "flight.h"
 #endif
 
+#ifndef AIRPORT_H_
+#include "airport.h"
+#endif
+
 typedef struct runway_item{
 	RUNWAY* runway;
 	RUNWAY_ITEM* next_runway;

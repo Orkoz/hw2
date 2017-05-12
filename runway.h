@@ -17,7 +17,7 @@ typedef struct flight_item FLIGHT_ITEM;
 
 RUNWAY* createRunway (int runway_num, FlightType runway_type);
 void destroyRunway (RUNWAY* runway);
-bool isFlightExists (RUNWAY* runway, int flight_num);
+BOOL isFlightExists (RUNWAY* runway, int flight_num);
 int getFlightNum (RUNWAY* runway);
 Result addFlight (RUNWAY* runway, FLIGHT* flight);
 Result removeFlight(RUNWAY* runway, int flight_num);
