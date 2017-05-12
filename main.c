@@ -27,6 +27,28 @@
 #endif
 
 #define MAX_LINE_SIZE 256
+#define EMERGENCY 0
+#define F_TYPE 1
+
+
+// Helper function for checking input
+BOOL chk_emg_and_typ(char par, int type)
+{
+	if (type == EMERGENCY)
+	{
+		if (par == 'E' || par == 'R')
+			return TRUE;
+	}
+	else if (type == F_TYPE)
+	{
+		if (par == 'I' || par == 'D')
+			return TRUE;
+	}
+	return FALSE;
+}
+
+
+
 
 int main()
 {
@@ -45,57 +67,109 @@ int main()
 		switch (command)
 		{
 		case "Insert":
-			//par1 = strtok(NULL, delimiters);
-			//par2 = strtok(NULL, delimiters);
 			if (par1 == NULL || par2 == NULL)
 			{
 				fprintf(stderr, "Insert failed: not enough parameters./n");
+				break;
 			}
 
+			int runway_num = atoi(par1);
+			if (runway_num == 0 || chk_emg_and_typ(par2, F_TYPE) == FALSE)
+			{
+				fprintf(stderr, "Insert execution failed./n");
+				break;
+			}
+
+			FlightType runway_type = ( *par2 == 'D' ? DOMESTIC : INTERNATIONAL );
+
+			if (addRunway(runway_num, runway_type) == FAILURE)
+			{
+				fprintf(stderr, "Insert execution failed./n");
+				break;
+			}
 			break;
+
 		case "Remove":
-			//par1 = strtok(NULL, delimiters);
 			if (par1 == NULL)
 			{
 				fprintf(stderr, "Remove failed: not enough parameters./n");
+				break;
+			}
+			int runway_num = atoi(par1);
+			if (runway_num == 0 || removeRunway(runway_num) == FAILURE)
+			{
+				fprintf(stderr, "Remove execution failed./n");
+				break;
 			}
 			break;
 		case "Add":
-			//par1 = strtok(NULL, delimiters);
-			//par2 = strtok(NULL, delimiters);
-			//par3 = strtok(NULL, delimiters);
-			//par4 = strtok(NULL, delimiters);
 			if (par1 == NULL || par2 == NULL || par3 == NULL || par4 == NULL)
 			{
 				fprintf(stderr, "Add failed: not enough parameters./n");
+				break;
+			}
+			int flight_num = atoi(par1);
+
+			if (flight_num == 0 || chk_emg_and_typ(par2, F_TYPE) == FALSE || chk_emg_and_typ(par4, EMERGENCY) == FALSE)
+			{
+				fprintf(stderr, "Add execution failed./n");
+				break;
+			}
+
+			FlightType runway_type = (*par2 == 'D' ? DOMESTIC : INTERNATIONAL);
+			BOOL emergency = (*par4 == 'E' ? TRUE : FALSE);
+
+			if (addFlightToAirport(flight_num, flight_type, par3, emergency) == FAILURE)
+			{
+				fprintf(stderr, "Add execution failed./n");
+				break;
 			}
 			break;
 		case "Depart":
-			//par1 = strtok(NULL, delimiters);
-			//par2 = strtok(NULL, delimiters);
 			if (par1 == NULL || par2 == NULL)
 			{
 				fprintf(stderr, "Depart failed: not enough parameters./n");
+				break;
+			}
+			int runway_num = atoi(par1);
+			int num_of_flights = atoi(par2);
+
+			if (runway_num == 0 || num_of_flights < 0 || departFromRunway(runway_num, num_of_flights) == FAILURE)
+			{
+				fprintf(stderr, "Depart execution failed./n");
+				break;
 			}
 			break;
 		case "Change":
-			//par1 = strtok(NULL, delimiters);
-			//par2 = strtok(NULL, delimiters);
 			if (par1 == NULL || par2 == NULL)
 			{
 				fprintf(stderr, "Change failed: not enough parameters./n");
+				break;
+			}
+			if (changeDest(par1, par2) == FAILURE)
+			{
+				fprintf(stderr, "Change execution failed./n");
+				break;
 			}
 			break;
 		case "Delay":
-			//par1 = strtok(NULL, delimiters);
 			if (par1 == NULL)
 			{
 				fprintf(stderr, "Delay failed: not enough parameters./n");
+				break;
+			}
+			if (delay(par1) == FAILURE)
+			{
+				fprintf(stderr, "Delay execution failed./n");
+				break;
 			}
 			break;
 		case "Print":
+			printAirport();
 			break;
 		case "Exit":
+			destroyAirport();
+			return 0;
 			break;
 		default:
 			fprintf(stderr, "Command not found./n");
@@ -103,24 +177,6 @@ int main()
 		}
 	}
 
-//לקרוא שורה
-//לחלק לפרמטרים
-//קייס לכל פקודה
-//בדיקת פרמטרים
-//ביצוע
-//
-//קלט לא תקין שגיאה
-//חוסר בפרמטרים
-//פקודה לא מוכרת
-//כשלון פקודה
-//
-//עבור עודף פרמטרים מתעלמים מהעודף וממשיכים כרגיל
-//
-//אם נגמר הקלט לשחרר מבנה נתונים
-//ותסיים
-
-
-	
-	
+	destroyAirport();
 	return 0;
 }

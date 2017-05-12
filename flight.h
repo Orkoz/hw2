@@ -18,9 +18,7 @@ void destroyFlight(FLIGHT* flight);
 void printFlight(FLIGHT* flight);
 
 BOOL is_num_valid(int num);
-BOOL is_type_valid(FlightType type);
 BOOL is_destination_valid(char destination[]);
-BOOL is_emergency_valid(BOOL emergency);
 BOOL compare_flight_num(FLIGHT* flight,int flight_num);
 
 #endif /* FLIGHT_H_*/

@@ -49,7 +49,7 @@ typedef struct flight_t{
 
 FLIGHT* createFlight(int flight_num, FlightType flight_type, char destination[], BOOL emergency){
 
-	BOOL valid = is_num_valid(flight_num) && is_type_valid(flight_type) && is_destination_valid(destination) && is_emergency_valid(emergency);
+	BOOL valid = is_num_valid(flight_num) && is_destination_valid(destination); // && is_emergency_valid(emergency); && is_type_valid(flight_type)
 	
 	if (valid){
 		FLIGHT* temp_flight = (FLIGHT*)malloc(sizeof(FLIGHT));
@@ -128,13 +128,13 @@ BOOL is_num_valid(int num){
 //* Return Value: BOOLean (true if valid and false if not).
 //*************************************************************************
 
-BOOL is_type_valid(FlightType type){
-	if (type == DOMESTIC || type == INTERNATIONAL)
-		return TRUE;
-	
-	//fprintf(stderr, "Invalid input type.\n Please enter either DOMESTIC or INTERNATIONAL\n");
-	return FALSE;
-}
+//BOOL is_type_valid(FlightType type){
+//	if (type == DOMESTIC || type == INTERNATIONAL)
+//		return TRUE;
+//	
+//	//fprintf(stderr, "Invalid input type.\n Please enter either DOMESTIC or INTERNATIONAL\n");
+//	return FALSE;
+//}
 
 
 //*************************************************************************
@@ -171,14 +171,14 @@ BOOL is_destination_valid(char destination[]){
 //*		-	emergency – flight emergency parameter (enum BOOL).
 //* Return Value: BOOLean (true if valid and false if not).
 //*************************************************************************
-
-BOOL is_emergency_valid(BOOL emergency){
-	if (emergency == TRUE || emergency == FALSE)
-		return TRUE;
-	
-	//fprintf(stderr, "Invalid input emergency parameter.\n Please enter either TRUE or FALSE\n");
-	return FALSE;
-}
+//
+//BOOL is_emergency_valid(BOOL emergency){
+//	if (emergency == TRUE || emergency == FALSE)
+//		return TRUE;
+//	
+//	//fprintf(stderr, "Invalid input emergency parameter.\n Please enter either TRUE or FALSE\n");
+//	return FALSE;
+//}
 
 BOOL compare_flight_num(FLIGHT* flight,int flight_num){
 	if (flight->flight_num == flight_num)

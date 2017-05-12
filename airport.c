@@ -38,7 +38,7 @@ typedef struct airport_t{
 
 static AIRPORT airport = (AIRPORT)malloc(sizeof(AIRPORT));
 
-Result addRunway{int runway_num, FlightType runway_type){
+Result addRunway(int runway_num, FlightType runway_type){
 	
 	if (runway_num_exists(runway_num) == TRUE)
 		return FAILURE;
@@ -108,7 +108,7 @@ Result removeRunway{int runway_num){
 	return FAILURE;
 }
 
-Result addFlightToAirport{int flight_num, FlightType flight_type, char destination[], BOOL emergency)
+Result addFlightToAirport(int flight_num, FlightType flight_type, char destination[], BOOL emergency)
 	{
 		if (airport->runway_list == NULL)
 			return FAILURE;
@@ -164,9 +164,9 @@ Result addFlightToAirport{int flight_num, FlightType flight_type, char destinati
 		}
 	}
 
-Result departFromRunway{int runway_num, int number_of_flights);
-Result changeDest{char destination[],char new_destination[]);
-Result delay{char destination[]);
+Result departFromRunway(int runway_num, int number_of_flights);
+Result changeDest(char destination[],char new_destination[]);
+Result delay(char destination[]);
 
 void printAirport()
 {

@@ -101,7 +101,7 @@ void destroyRunway (RUNWAY* runway)
 
 BOOL isFlightExists (RUNWAY* runway, int flight_num)
 {
-	if (runway == NULL || is_num_valid(flight_num) == 0)
+	if (runway == NULL) || is_num_valid(flight_num) == FALSE)
 		return FALSE;
 	FLIGHT_ITEM* temp_flight_item;
 	temp_flight_item = runway->first_flight;
@@ -209,7 +209,7 @@ Result addFlight (RUNWAY* runway, FLIGHT* flight)
 
 Result removeFlight(RUNWAY* runway, int flight_num)
 {
-	if (runway == NULL || runway->first_flight == NULL ||  is_num_valid(flight_num) == 0)
+	if (runway == NULL || runway->first_flight == NULL ||  a(flight_num) == 0)
 		return FAILURE;
 	
 	FLIGHT_ITEM* temp_flight;
