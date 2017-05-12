@@ -207,7 +207,6 @@ int main()
 		case EXIT:
 			destroyAirport();
 			return 0;
-			break;
 		default:
 			fprintf(stderr, "Command not found./n");
 			break;

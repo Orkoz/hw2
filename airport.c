@@ -36,6 +36,7 @@ typedef struct airport_t{
 	RUNWAY_ITEM* last_runway;
 }AIRPORT;
 
+
 static AIRPORT* airport;
 
 BOOL create_airport()
@@ -46,17 +47,18 @@ BOOL create_airport()
 	return FALSE;
 }
 
-Result addRunway(int runway_num, FlightType runway_type){
 
-	
+Result addRunway(int runway_num, FlightType runway_type) {
+  
 	if (runway_num_exists(runway_num) != NULL)
 		return FAILURE;
-		
+
 	RUNWAY* new_runway = createRunway(runway_num, runway_type);
 	RUNWAY_ITEM* new_runway_item = (RUNWAY_ITEM*)malloc(sizeof(RUNWAY_ITEM));
 	if (new_runway_item !=NULL){
 		new_runway_item->runway = new_runway;
 		new_runway_item->next_runway = NULL;
+
 		airport->last_runway->next_runway = new_runway_item;
 		airport->last_runway = new_runway_item;
 		return SUCCESS;
