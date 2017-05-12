@@ -209,7 +209,7 @@ Result addFlight (RUNWAY* runway, FLIGHT* flight)
 
 Result removeFlight(RUNWAY* runway, int flight_num)
 {
-	if (runway == NULL || runway->first_flight == NULL ||  a(flight_num) == 0)
+	if (runway == NULL || runway->first_flight == NULL || is_num_valid(flight_num) == FALSE)
 		return FAILURE;
 	
 	FLIGHT_ITEM* temp_flight;
