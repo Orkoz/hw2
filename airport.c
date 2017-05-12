@@ -36,22 +36,21 @@ typedef struct airport_t{
 	RUNWAY_ITEM* last_runway;
 }AIRPORT;
 
-static AIRPORT airport = (AIRPORT)malloc(sizeof(AIRPORT));
+static AIRPORT* airport = (AIRPORT*)malloc(sizeof(AIRPORT));
+
+Result addRunway(int runway_num, FlightType runway_type) {
 
 
-Result addRunway(int runway_num, FlightType runway_type){
-
-	
 	if (runway_num_exists(runway_num) != NULL)
 		return FAILURE;
-		
+
 	RUNWAY* new_runway = createRunway(runway_num, runway_type);
 	RUNWAY_ITEM* new_runway_item = (RUNWAY_ITEM*)malloc(sizeof(RUNWAY_ITEM));
 	if (new_runway_item !=NULL){
 		new_runway_item->runway = new_runway;
 		new_runway_item-> NULL;
-		airport.last_runway->next_runway = new_runway_item;
-		airport.last_runway = new_runway_item;
+		airport->last_runway->next_runway = new_runway_item;
+		airport->last_runway = new_runway_item;
 		return SUCCESS;
 	}
 
@@ -60,7 +59,7 @@ Result addRunway(int runway_num, FlightType runway_type){
 
 RUNWAY* runway_num_exists(int runway_num){
 
-	RUNWAY_ITEM* temp_runway = airport.runway_list;
+	RUNWAY_ITEM* temp_runway = airport->runway_list;
 	while (temp_runway != NULL)
 	{
 		if (get_runway_num(temp_runway->runway) == runway_num)
@@ -71,18 +70,18 @@ RUNWAY* runway_num_exists(int runway_num){
 }
 
 Result removeRunway(int runway_num){
-	if (airport.runway_list == NULL)
+	if (airport->runway_list == NULL)
 		return FAILURE;
 	if (runway_num_exists(runway_num) == NULL)
 		return FAILURE;
 	
 	RUNWAY_ITEM* deleted_runway_item;
-	RUNWAY_ITEM* temp_runway_item = airport.runway_list;
+	RUNWAY_ITEM* temp_runway_item = airport->runway_list;
 	
 	// dealing with first runway item
-	if (get_runway_num(temp_runway->runway) == runway_num)
+	if (get_runway_num(temp_runway_item->runway) == runway_num)
 	{
-		airport.runway_list = temp_runway_item->next_runway;
+		airport->runway_list = temp_runway_item->next_runway;
 		destroyRunway(temp_runway_item->runway);
 		free(temp_runway_item);
 		return SUCCESS;
@@ -109,7 +108,7 @@ Result removeRunway(int runway_num){
 
 Result addFlightToAirport(int flight_num, FlightType flight_type, char destination[], BOOL emergency)
 	{
-		if (airport.runway_list == NULL)
+		if (airport->runway_list == NULL)
 			return FAILURE;
 		
 		//  creating flight, checking parameters in module flight
@@ -120,7 +119,7 @@ Result addFlightToAirport(int flight_num, FlightType flight_type, char destinati
 
 		// Going through every runway checking if flight num exists
 		// Also checking for the runway with minimal flights in list
-		RUNWAY_ITEM* temp_runway_item = airport.runway_list;
+		RUNWAY_ITEM* temp_runway_item = airport->runway_list;
 		int counter = 0;
 		RUNWAY_ITEM* minimal_flights_runway = NULL;
 		
@@ -182,7 +181,7 @@ Result changeDest(char destination[],char new_destination[]){
 	if (~(is_destination_valid(destination) && is_destination_valid(new_destination)))
 		return FAILURE;
 
-	RUNWAY_ITEM* temp_runway_item = airport.runway_list;
+	RUNWAY_ITEM* temp_runway_item = airport->runway_list;
 
 	while (temp_runway_item != NULL){
 		FLIGHT* temp_flight = isFlightDest(temp_runway_item->runway, destination);
@@ -201,7 +200,7 @@ Result delay(char destination[]){
 	if (!(is_destination_valid(destination)))
 		return FAILURE;
 
-	RUNWAY_ITEM* temp_runway_item = airport.runway_list;
+	RUNWAY_ITEM* temp_runway_item = airport->runway_list;
 	RUNWAY* temp_runway = createRunway(get_runway_num(temp_runway_item->runway), get_runway_type(temp_runway_item->runway));
 
 	while (temp_runway_item != NULL){
@@ -230,7 +229,7 @@ Result delay(char destination[]){
 void printAirport()
 {
 	printf("Airport status:/n");
-	RUNWAY_ITEM* temp_runway_item = airport.runway_list;
+	RUNWAY_ITEM* temp_runway_item = airport->runway_list;
 	while (temp_runway_item != NULL)
 	{
 		printRunway(temp_runway_item->runway);
@@ -240,7 +239,7 @@ void printAirport()
 
 void destroyAirport()
 {
-	RUNWAY_ITEM* deleted_runway_item = airport.runway_list;
+	RUNWAY_ITEM* deleted_runway_item = airport->runway_list;
 	RUNWAY_ITEM* temp_runway_item = NULL;
 	while (deleted_runway_item != NULL)
 	{

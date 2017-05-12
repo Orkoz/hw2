@@ -49,7 +49,7 @@ typedef struct flight_t{
 
 FLIGHT* createFlight(int flight_num, FlightType flight_type, char destination[], BOOL emergency){
 
-	BOOL valid = is_num_valid(flight_num) && is_destination_valid(destination); // && is_emergency_valid(emergency); && is_type_valid(flight_type)
+	BOOL valid = (BOOL) (is_num_valid(flight_num) && is_destination_valid(destination)); // && is_emergency_valid(emergency); && is_type_valid(flight_type)
 	
 	if (valid){
 		FLIGHT* temp_flight = (FLIGHT*)malloc(sizeof(FLIGHT));
@@ -100,7 +100,7 @@ void printFlight(FLIGHT* flight){
 		emg = 'E';
 	if (flight->flight_type==INTERNATIONAL) 
 		type = 'I';
-	printf("Flight %n %d %s %d/n", flight->flight_num,type,flight->destination,emg);
+	printf("Flight %i %d %s %d/n", flight->flight_num,type,flight->destination,emg);
 }
 
 //*************************************************************************
