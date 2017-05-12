@@ -189,3 +189,21 @@ BOOL compare_flight_num(FLIGHT* flight,int flight_num){
 		return FALSE;
 	}
 }
+
+bool compare_flight_dest(FLIGHT* flight, char destination[]){
+	if (strcmp(flight->destination, destination))
+	{
+		return FALSE;
+	} else
+	{
+		return TRUE;
+	}
+}
+
+void change_flight_dest(FLIGHT* flight, char destination[]){
+	strcpy(flight->destination,destination);
+}
+
+int get_flight_num(FLIGHT* flight){
+	return flight->flight_num;
+}
