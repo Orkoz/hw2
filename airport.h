@@ -26,7 +26,8 @@ Result changeDest(char destination[],char new_destination[]);
 Result delay(char destination[]);
 void printAirport();
 void destroyAirport();
-bool runway_num_exists(int runway_num);
+RUNWAY* runway_num_exists(int runway_num);
+BOOL create_airport();
 
 #endif /* AIRPOET_H_*/
 
