@@ -285,8 +285,8 @@ Result delay(char destination[]){
 	//goes trow every flight in the airport.
 	RUNWAY_ITEM* temp_runway_item = airport->runway_list; 	/*a temp runway list which will contain all the runway's flight which there 
 															distention equals to the given destination, one runway at the time*/
-	RUNWAY* temp_runway = createRunway(get_runway_num(temp_runway_item->runway), get_runway_type(temp_runway_item->runway));
 	while (temp_runway_item != NULL){
+		RUNWAY* temp_runway = createRunway(get_runway_num(temp_runway_item->runway), get_runway_type(temp_runway_item->runway)); 	
 		FLIGHT* temp_flight = isFlightDest(temp_runway_item->runway, destination); /*find the first flight in the runway which its distention 
 																					equals to the given destination.*/
 		while (temp_flight != NULL) {
@@ -304,9 +304,9 @@ Result delay(char destination[]){
 		}
 
 		temp_runway_item = temp_runway_item->next_runway;
+		destroyRunway(temp_runway);
 	}
 
-	destroyRunway(temp_runway);
 	return SUCCESS;
 }
 
@@ -327,6 +327,8 @@ void printAirport()
 		printRunway(temp_runway_item->runway);
 		temp_runway_item = temp_runway_item->next_runway;
 	}
+	
+	printf("\n");
 }
 
 
