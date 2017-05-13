@@ -1,12 +1,3 @@
-//*************************************************************************
-//* Function name:
-//* Description:
-//* Parameters:
-//* Return Value:
-//*************************************************************************
-
-
-
 #ifndef STRING_H_
 #include <string.h>
 #endif
@@ -30,9 +21,8 @@
 typedef struct flight_t{
 	int flight_num;
 	FlightType flight_type;
-	char destination[DEST_CHAR_NUM];
+	char destination[DEST_CHAR_NUM+1];
 	BOOL emergency;
-	//FLIGHT* pNext;
 }FLIGHT;
 
 
@@ -49,7 +39,7 @@ typedef struct flight_t{
 
 FLIGHT* createFlight(int flight_num, FlightType flight_type, char destination[], BOOL emergency){
 
-	BOOL valid = (BOOL) (is_num_valid(flight_num) && is_destination_valid(destination)); // && is_emergency_valid(emergency); && is_type_valid(flight_type)
+	BOOL valid = (BOOL) (is_num_valid(flight_num) && is_destination_valid(destination)); 
 	
 	if (valid){
 		FLIGHT* temp_flight = (FLIGHT*)malloc(sizeof(FLIGHT));
@@ -74,13 +64,7 @@ FLIGHT* createFlight(int flight_num, FlightType flight_type, char destination[],
 //*************************************************************************
 
 void destroyFlight(FLIGHT* flight){
-	//FLIGHT* temp_flight = flight->pNext;
-	//*flight=*temp_flight;
-	// in case *flight=*temp_flight dont work:
-		// flight->flight_num=temp_flight->flight_num;
-		// flight->flight_type=temp_flight->flight_type;
-		// flight->destination=temp_flight->destination;
-		// flight->emergency=temp_flight->emergency;
+
 	free(flight);
 }
 
@@ -100,7 +84,7 @@ void printFlight(FLIGHT* flight){
 		emg = 'E';
 	if (flight->flight_type==INTERNATIONAL) 
 		type = 'I';
-	printf("Flight %i %d %s %d/n", flight->flight_num,type,flight->destination,emg);
+	printf("Flight %i %d %s %d\n", flight->flight_num,type,flight->destination,emg);
 }
 
 //*************************************************************************
@@ -120,21 +104,7 @@ BOOL is_num_valid(int num){
 }
 
 
-//*************************************************************************
-//* Function name: is_type_valid.
-//* Description: checks if the input flight or runway type is valid (either DOMESTIC or INTERNATIONAL).
-//* Parameters:
-//*		-	type – flight or runway type (enum FlightType).
-//* Return Value: BOOLean (true if valid and false if not).
-//*************************************************************************
 
-//BOOL is_type_valid(FlightType type){
-//	if (type == DOMESTIC || type == INTERNATIONAL)
-//		return TRUE;
-//	
-//	//fprintf(stderr, "Invalid input type.\n Please enter either DOMESTIC or INTERNATIONAL\n");
-//	return FALSE;
-//}
 
 
 //*************************************************************************
@@ -148,14 +118,12 @@ BOOL is_num_valid(int num){
 BOOL is_destination_valid(char destination[]){
 	int length = strlen(destination);
 	
-	if (length != 3){
-		//fprintf(stderr, "Invalid input destination.\n Please enter destination length in 3 charters\n");
+	if (length != DEST_CHAR_NUM){
 		return FALSE;
 	}
 	
     for (int i=0;i<length;i++){
 		if((destination[i] < 'A' && destination[i] > 'Z')) {
-			//fprintf(stderr, "Invalid input destination.\n Please enter destination in capital letters\n");
 			return FALSE;
 		}
 	}
@@ -190,7 +158,7 @@ BOOL compare_flight_num(FLIGHT* flight,int flight_num){
 	}
 }
 
-bool compare_flight_dest(FLIGHT* flight, char destination[]){
+BOOL compare_flight_dest(FLIGHT* flight, char destination[]){
 	if (strcmp(flight->destination, destination))
 	{
 		return FALSE;
@@ -206,4 +174,17 @@ void change_flight_dest(FLIGHT* flight, char destination[]){
 
 int get_flight_num(FLIGHT* flight){
 	return flight->flight_num;
+}
+
+FlightType get_flight_type(FLIGHT* flight)
+{
+	return flight->flight_type;
+}
+char* get_flight_dest(FLIGHT* flight)
+{
+	return flight->destination;
+}
+BOOL get_flight_emerg(FLIGHT* flight)
+{
+	return flight->emergency;
 }
