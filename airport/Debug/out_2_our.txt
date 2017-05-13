@@ -1,0 +1,17 @@
+Airport status:
+Runway 30 domestic
+0 flights are waiting:
+Runway 10 international
+5 flights are waiting:
+Flight 12 73 LHR 69
+Flight 13 73 CDG 69
+Flight 14 73 LHR 69
+Flight 11 73 LHR 82
+Flight 15 73 CDG 82
+Runway 20 international
+5 flights are waiting:
+Flight 21 73 LHR 69
+Flight 23 73 CDG 69
+Flight 22 73 LHR 82
+Flight 24 73 CDG 82
+Flight 25 73 LHR 82

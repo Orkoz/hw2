@@ -265,7 +265,8 @@ Result removeFlight(RUNWAY* runway, int flight_num)
 			free(temp_flight_next);
 			return SUCCESS;
 		}
-		
+		temp_flight = temp_flight->next_flight_item;
+		temp_flight_next = temp_flight->next_flight_item;
 	}
 	return FAILURE;
 }

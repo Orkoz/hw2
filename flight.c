@@ -84,7 +84,7 @@ void printFlight(FLIGHT* flight){
 		emg = 'E';
 	if (flight->flight_type==INTERNATIONAL) 
 		type = 'I';
-	printf("Flight %i %d %s %d\n", flight->flight_num,type,flight->destination,emg);
+	printf("Flight %d %c %s %c\n", flight->flight_num,type,flight->destination,emg);
 }
 
 //*************************************************************************
@@ -123,30 +123,14 @@ BOOL is_destination_valid(char destination[]){
 	}
 	
     for (int i=0;i<length;i++){
-		if((destination[i] < 'A' && destination[i] > 'Z')) {
+		if((destination[i] < 'A' || destination[i] > 'Z')) {
 			return FALSE;
 		}
 	}
-	
 	return TRUE;
 }
 
 
-//*************************************************************************
-//* Function name: is_emergency_valid.
-//* Description: checks if the input flight emergency parameter is valid (TRUE or FALSE).
-//* Parameters:
-//*		-	emergency – flight emergency parameter (enum BOOL).
-//* Return Value: BOOLean (true if valid and false if not).
-//*************************************************************************
-//
-//BOOL is_emergency_valid(BOOL emergency){
-//	if (emergency == TRUE || emergency == FALSE)
-//		return TRUE;
-//	
-//	//fprintf(stderr, "Invalid input emergency parameter.\n Please enter either TRUE or FALSE\n");
-//	return FALSE;
-//}
 
 BOOL compare_flight_num(FLIGHT* flight,int flight_num){
 	if (flight->flight_num == flight_num)
