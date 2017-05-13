@@ -91,6 +91,8 @@ int main()
 	while (fgets(szLine, MAX_LINE_SIZE, stdin))
 	{
 		command_string = strtok(szLine, delimiters);
+		if (command_string == NULL)
+			continue;
 		usr_command = select_command(command_string);
 		par1 = strtok(NULL, delimiters);
 		par2 = strtok(NULL, delimiters);
