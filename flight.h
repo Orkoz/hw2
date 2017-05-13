@@ -23,9 +23,11 @@ void printFlight(FLIGHT* flight);
 BOOL is_num_valid(int num);
 BOOL is_destination_valid(char destination[]);
 BOOL compare_flight_num(FLIGHT* flight,int flight_num);
-bool compare_flight_dest(FLIGHT* flight, char destination[]);
+BOOL compare_flight_dest(FLIGHT* flight, char destination[]);
 void change_flight_dest(FLIGHT* flight, char destination[]);
 int get_flight_num(FLIGHT* flight);
-
+FlightType get_flight_type(FLIGHT* flight);
+char* get_flight_dest(FLIGHT* flight);
+BOOL get_flight_emerg(FLIGHT* flight);
 
 #endif /* FLIGHT_H_*/

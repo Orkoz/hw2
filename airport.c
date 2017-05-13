@@ -36,11 +36,24 @@ typedef struct airport_t{
 	RUNWAY_ITEM* last_runway;
 }AIRPORT;
 
-static AIRPORT* airport = (AIRPORT*)malloc(sizeof(AIRPORT));
+
+static AIRPORT* airport;
+
+BOOL create_airport()
+{
+	airport = (AIRPORT*)malloc(sizeof(AIRPORT));
+	if (airport != NULL)
+	{
+		airport->runway_list = NULL;
+		airport->last_runway = NULL;
+		return TRUE;
+	}
+	return FALSE;
+}
+
 
 Result addRunway(int runway_num, FlightType runway_type) {
-
-
+  
 	if (runway_num_exists(runway_num) != NULL)
 		return FAILURE;
 
@@ -48,12 +61,21 @@ Result addRunway(int runway_num, FlightType runway_type) {
 	RUNWAY_ITEM* new_runway_item = (RUNWAY_ITEM*)malloc(sizeof(RUNWAY_ITEM));
 	if (new_runway_item !=NULL){
 		new_runway_item->runway = new_runway;
-		new_runway_item-> NULL;
-		airport->last_runway->next_runway = new_runway_item;
-		airport->last_runway = new_runway_item;
+		new_runway_item->next_runway = NULL;
+
+		if (airport->runway_list == NULL) // If this is the first runway added
+		{
+			airport->runway_list = new_runway_item;
+			airport->last_runway = new_runway_item;
+		}
+		else
+		{
+			airport->last_runway->next_runway = new_runway_item;
+			airport->last_runway = new_runway_item;
+		}
+
 		return SUCCESS;
 	}
-
 	return FAILURE;
 }
 
@@ -151,7 +173,7 @@ Result addFlightToAirport(int flight_num, FlightType flight_type, char destinati
 			temp_runway_item = temp_runway_item->next_runway;
 		}
 		
-		if (addFlight(minimal_flights_runway->runway, flight) == SUCCESS)
+		if (minimal_flights_runway!= NULL && addFlight(minimal_flights_runway->runway, flight) == SUCCESS)
 		{
 			destroyFlight(flight);
 			return SUCCESS;
@@ -178,7 +200,7 @@ Result departFromRunway(int runway_num, int number_of_flights){
 }
 
 Result changeDest(char destination[],char new_destination[]){
-	if (~(is_destination_valid(destination) && is_destination_valid(new_destination)))
+	if (!(is_destination_valid(destination) && is_destination_valid(new_destination)))
 		return FAILURE;
 
 	RUNWAY_ITEM* temp_runway_item = airport->runway_list;
@@ -186,19 +208,19 @@ Result changeDest(char destination[],char new_destination[]){
 	while (temp_runway_item != NULL){
 		FLIGHT* temp_flight = isFlightDest(temp_runway_item->runway, destination);
 		while (temp_flight != NULL) {
-			change_flight_dest(temp_flight, destination);
+			change_flight_dest(temp_flight, new_destination);
 			temp_flight = isFlightDest(temp_runway_item->runway, destination);
 		}
 		temp_runway_item = temp_runway_item->next_runway;
 	}
-
 	return SUCCESS;
-
 }
 
 Result delay(char destination[]){
 	if (!(is_destination_valid(destination)))
 		return FAILURE;
+	if (airport->runway_list == NULL)
+		return SUCCESS;
 
 	RUNWAY_ITEM* temp_runway_item = airport->runway_list;
 	RUNWAY* temp_runway = createRunway(get_runway_num(temp_runway_item->runway), get_runway_type(temp_runway_item->runway));
@@ -228,7 +250,7 @@ Result delay(char destination[]){
 
 void printAirport()
 {
-	printf("Airport status:/n");
+	printf("Airport status:\n");
 	RUNWAY_ITEM* temp_runway_item = airport->runway_list;
 	while (temp_runway_item != NULL)
 	{
