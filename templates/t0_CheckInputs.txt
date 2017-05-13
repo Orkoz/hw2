@@ -1,0 +1,73 @@
+Insert 1 I
+Insert 2 I
+Insert 9 I
+Insert 4 D
+Insert 8 I
+Insert 6 D
+
+Hello
+Bye
+
+Insert 
+Delay 
+Depart
+Add
+Print
+
+Insert -1
+Insert 1 
+Insert D
+Insert I
+Insert Insert
+Insert I I 
+Insert D D
+Insert E 
+Insert R
+Insert 10000000000000 I
+Insert 10000000000000 D
+INSERT
+
+Delay abc
+Delay Abc
+Delay aBc
+Delay ACBF
+Delay ASDKFLSDKF@E!@ODPLE:DL:SDKF{{Label}}
+Delay XXX
+Delay SD
+Delay RALFFG
+DELAY RAASD
+
+Print
+
+DEPART KSD
+Depart klfs 3
+Depart KSD 1
+Depart klksad 1
+Depart 123  12 3313
+Depart 123 3123
+Depart 10000000000000000 1
+Depart 3 2
+Depart 2
+Depart -2
+Depart 1 3
+Depart 2 1
+Depart 3 1
+Print
+Add 2 I JFK R
+Add 100000000000000000000000000 I JFK R 
+ADD 100
+Add 2 2 3 4
+Add I JGK R
+Add D A F 
+Add -10 3
+Add 1 D HFA R
+Add 1 I JFK R
+Add 2 I JFK R
+Add 3 D ETH E
+Add 4 I CDG R
+Add 5 I ORD E
+Add 6 D HFA E
+Add 7 D eth E
+Print
+Exit 10000000000000000
+Exit 

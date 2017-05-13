@@ -5,16 +5,16 @@
 #include "flight.h"
 #include "runway.h"
 
-typedef struct runway_t{
+struct runway_t{
 	int runway_num;
 	FlightType runway_type;
 	FLIGHT_ITEM* first_flight; 
-}	RUNWAY;
+};
 
-typedef struct flight_item{
+struct flight_item{
 	FLIGHT* this_flight;
 	FLIGHT_ITEM* next_flight_item;
-}	FLIGHT_ITEM;
+};
 
 
 //*************************************************************************
@@ -27,16 +27,18 @@ typedef struct flight_item{
 //*************************************************************************
 
 RUNWAY* createRunway (int runway_num, FlightType runway_type){
-	RUNWAY* temp_runway = (RUNWAY*)malloc(sizeof(RUNWAY));
-	if (temp_runway != NULL)
-	{
-		temp_runway->runway_num=runway_num;
-		temp_runway->runway_type=runway_type;
-		temp_runway->first_flight=NULL;
-		return temp_runway;
-	} else {
-		return NULL;
-	}
+
+    if(is_num_valid(runway_num) == TRUE) {
+        RUNWAY *temp_runway = (RUNWAY *) malloc(sizeof(RUNWAY));
+        if (temp_runway != NULL) {
+            temp_runway->runway_num = runway_num;
+            temp_runway->runway_type = runway_type;
+            temp_runway->first_flight = NULL;
+            return temp_runway;
+        }
+    }
+
+    return NULL;
 }
 
 
