@@ -1,0 +1,24 @@
+Airport status:
+Airport status:
+Runway 2 international
+2 flights are waiting:
+Flight 5 73 ORD 69
+Flight 2 73 JFK 82
+Runway 3 international
+1 flights are waiting:
+Flight 4 73 CDG 82
+Runway 1 domestic
+4 flights are waiting:
+Flight 3 68 ETH 69
+Flight 6 68 HFA 69
+Flight 7 68 eth 69
+Flight 1 68 HFA 82
+Airport status:
+Runway 2 international
+2 flights are waiting:
+Flight 5 73 ORD 69
+Flight 2 73 JFK 82
+Runway 1 domestic
+1 flights are waiting:
+Flight 1 68 HFA 82
+Airport status:
