@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/hw2.dir/main.c.obj"
   "CMakeFiles/hw2.dir/airport.c.obj"
   "CMakeFiles/hw2.dir/flight.c.obj"
   "CMakeFiles/hw2.dir/runway.c.obj"

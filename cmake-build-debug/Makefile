@@ -176,6 +176,33 @@ flight.c.s:
 	$(MAKE) -f CMakeFiles\hw2.dir\build.make CMakeFiles/hw2.dir/flight.c.s
 .PHONY : flight.c.s
 
+main.obj: main.c.obj
+
+.PHONY : main.obj
+
+# target to build an object file
+main.c.obj:
+	$(MAKE) -f CMakeFiles\hw2.dir\build.make CMakeFiles/hw2.dir/main.c.obj
+.PHONY : main.c.obj
+
+main.i: main.c.i
+
+.PHONY : main.i
+
+# target to preprocess a source file
+main.c.i:
+	$(MAKE) -f CMakeFiles\hw2.dir\build.make CMakeFiles/hw2.dir/main.c.i
+.PHONY : main.c.i
+
+main.s: main.c.s
+
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.c.s:
+	$(MAKE) -f CMakeFiles\hw2.dir\build.make CMakeFiles/hw2.dir/main.c.s
+.PHONY : main.c.s
+
 runway.obj: runway.c.obj
 
 .PHONY : runway.obj
@@ -218,6 +245,9 @@ help:
 	@echo ... flight.obj
 	@echo ... flight.i
 	@echo ... flight.s
+	@echo ... main.obj
+	@echo ... main.i
+	@echo ... main.s
 	@echo ... runway.obj
 	@echo ... runway.i
 	@echo ... runway.s

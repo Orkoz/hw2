@@ -56,9 +56,33 @@ include CMakeFiles/hw2.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/hw2.dir/flags.make
 
+CMakeFiles/hw2.dir/main.c.obj: CMakeFiles/hw2.dir/flags.make
+CMakeFiles/hw2.dir/main.c.obj: ../main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Or\Desktop\hw2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/hw2.dir/main.c.obj"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\gcc.exe  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\hw2.dir\main.c.obj   -c C:\Users\Or\Desktop\hw2\main.c
+
+CMakeFiles/hw2.dir/main.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/hw2.dir/main.c.i"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\gcc.exe  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\Or\Desktop\hw2\main.c > CMakeFiles\hw2.dir\main.c.i
+
+CMakeFiles/hw2.dir/main.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/hw2.dir/main.c.s"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\gcc.exe  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\Or\Desktop\hw2\main.c -o CMakeFiles\hw2.dir\main.c.s
+
+CMakeFiles/hw2.dir/main.c.obj.requires:
+
+.PHONY : CMakeFiles/hw2.dir/main.c.obj.requires
+
+CMakeFiles/hw2.dir/main.c.obj.provides: CMakeFiles/hw2.dir/main.c.obj.requires
+	$(MAKE) -f CMakeFiles\hw2.dir\build.make CMakeFiles/hw2.dir/main.c.obj.provides.build
+.PHONY : CMakeFiles/hw2.dir/main.c.obj.provides
+
+CMakeFiles/hw2.dir/main.c.obj.provides.build: CMakeFiles/hw2.dir/main.c.obj
+
+
 CMakeFiles/hw2.dir/airport.c.obj: CMakeFiles/hw2.dir/flags.make
 CMakeFiles/hw2.dir/airport.c.obj: ../airport.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Or\Desktop\hw2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/hw2.dir/airport.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Or\Desktop\hw2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/hw2.dir/airport.c.obj"
 	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\gcc.exe  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\hw2.dir\airport.c.obj   -c C:\Users\Or\Desktop\hw2\airport.c
 
 CMakeFiles/hw2.dir/airport.c.i: cmake_force
@@ -82,7 +106,7 @@ CMakeFiles/hw2.dir/airport.c.obj.provides.build: CMakeFiles/hw2.dir/airport.c.ob
 
 CMakeFiles/hw2.dir/flight.c.obj: CMakeFiles/hw2.dir/flags.make
 CMakeFiles/hw2.dir/flight.c.obj: ../flight.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Or\Desktop\hw2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/hw2.dir/flight.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Or\Desktop\hw2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/hw2.dir/flight.c.obj"
 	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\gcc.exe  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\hw2.dir\flight.c.obj   -c C:\Users\Or\Desktop\hw2\flight.c
 
 CMakeFiles/hw2.dir/flight.c.i: cmake_force
@@ -106,7 +130,7 @@ CMakeFiles/hw2.dir/flight.c.obj.provides.build: CMakeFiles/hw2.dir/flight.c.obj
 
 CMakeFiles/hw2.dir/runway.c.obj: CMakeFiles/hw2.dir/flags.make
 CMakeFiles/hw2.dir/runway.c.obj: ../runway.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Or\Desktop\hw2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/hw2.dir/runway.c.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Or\Desktop\hw2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/hw2.dir/runway.c.obj"
 	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\gcc.exe  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\hw2.dir\runway.c.obj   -c C:\Users\Or\Desktop\hw2\runway.c
 
 CMakeFiles/hw2.dir/runway.c.i: cmake_force
@@ -130,6 +154,7 @@ CMakeFiles/hw2.dir/runway.c.obj.provides.build: CMakeFiles/hw2.dir/runway.c.obj
 
 # Object files for target hw2
 hw2_OBJECTS = \
+"CMakeFiles/hw2.dir/main.c.obj" \
 "CMakeFiles/hw2.dir/airport.c.obj" \
 "CMakeFiles/hw2.dir/flight.c.obj" \
 "CMakeFiles/hw2.dir/runway.c.obj"
@@ -137,6 +162,7 @@ hw2_OBJECTS = \
 # External object files for target hw2
 hw2_EXTERNAL_OBJECTS =
 
+hw2.exe: CMakeFiles/hw2.dir/main.c.obj
 hw2.exe: CMakeFiles/hw2.dir/airport.c.obj
 hw2.exe: CMakeFiles/hw2.dir/flight.c.obj
 hw2.exe: CMakeFiles/hw2.dir/runway.c.obj
@@ -144,7 +170,7 @@ hw2.exe: CMakeFiles/hw2.dir/build.make
 hw2.exe: CMakeFiles/hw2.dir/linklibs.rsp
 hw2.exe: CMakeFiles/hw2.dir/objects1.rsp
 hw2.exe: CMakeFiles/hw2.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Or\Desktop\hw2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable hw2.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\Or\Desktop\hw2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable hw2.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\hw2.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -152,6 +178,7 @@ CMakeFiles/hw2.dir/build: hw2.exe
 
 .PHONY : CMakeFiles/hw2.dir/build
 
+CMakeFiles/hw2.dir/requires: CMakeFiles/hw2.dir/main.c.obj.requires
 CMakeFiles/hw2.dir/requires: CMakeFiles/hw2.dir/airport.c.obj.requires
 CMakeFiles/hw2.dir/requires: CMakeFiles/hw2.dir/flight.c.obj.requires
 CMakeFiles/hw2.dir/requires: CMakeFiles/hw2.dir/runway.c.obj.requires

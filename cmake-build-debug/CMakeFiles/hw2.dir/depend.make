@@ -11,6 +11,12 @@ CMakeFiles/hw2.dir/flight.c.obj: ../ex2.h
 CMakeFiles/hw2.dir/flight.c.obj: ../flight.c
 CMakeFiles/hw2.dir/flight.c.obj: ../flight.h
 
+CMakeFiles/hw2.dir/main.c.obj: ../airport.h
+CMakeFiles/hw2.dir/main.c.obj: ../ex2.h
+CMakeFiles/hw2.dir/main.c.obj: ../flight.h
+CMakeFiles/hw2.dir/main.c.obj: ../main.c
+CMakeFiles/hw2.dir/main.c.obj: ../runway.h
+
 CMakeFiles/hw2.dir/runway.c.obj: ../ex2.h
 CMakeFiles/hw2.dir/runway.c.obj: ../flight.h
 CMakeFiles/hw2.dir/runway.c.obj: ../runway.c

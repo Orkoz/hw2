@@ -95,6 +95,9 @@
 		<Unit filename="C:/Users/Or/Desktop/hw2/flight.h">
 			<Option target="hw2"/>
 		</Unit>
+		<Unit filename="C:/Users/Or/Desktop/hw2/main.c">
+			<Option target="hw2"/>
+		</Unit>
 		<Unit filename="C:/Users/Or/Desktop/hw2/runway.c">
 			<Option target="hw2"/>
 		</Unit>

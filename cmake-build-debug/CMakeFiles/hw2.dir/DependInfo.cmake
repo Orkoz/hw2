@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_C
   "C:/Users/Or/Desktop/hw2/airport.c" "C:/Users/Or/Desktop/hw2/cmake-build-debug/CMakeFiles/hw2.dir/airport.c.obj"
   "C:/Users/Or/Desktop/hw2/flight.c" "C:/Users/Or/Desktop/hw2/cmake-build-debug/CMakeFiles/hw2.dir/flight.c.obj"
+  "C:/Users/Or/Desktop/hw2/main.c" "C:/Users/Or/Desktop/hw2/cmake-build-debug/CMakeFiles/hw2.dir/main.c.obj"
   "C:/Users/Or/Desktop/hw2/runway.c" "C:/Users/Or/Desktop/hw2/cmake-build-debug/CMakeFiles/hw2.dir/runway.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
