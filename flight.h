@@ -1,14 +1,9 @@
 /* flight.h - intarface to an Flight ADT which implements a singal flight*/
 
-
 #ifndef FLIGHT_H_
 #define FLIGHT_H_
 
-#include <stdbool.h>
-
-#ifndef EX2_H_
 #include "ex2.h"
-#endif
 
 //#include "stdio.h"
 //#include "stdlib.h"

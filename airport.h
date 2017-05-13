@@ -1,17 +1,11 @@
+/* airport.h - intarface to an Airport ADT which implements a singal airport*/
+
 #ifndef AIRPOET_H_
 #define AIRPOET_H_
 
-#ifndef EX2_H_
 #include "ex2.h"
-#endif
-
-#ifndef RUNWAY_H_
 #include "runway.h"
-#endif
-
-#ifndef FLIGHT_H_
 #include "flight.h"
-#endif
 
 //#include "stdio.h"
 //#include "stdlib.h"
@@ -26,7 +20,7 @@ Result changeDest(char destination[],char new_destination[]);
 Result delay(char destination[]);
 void printAirport();
 void destroyAirport();
-RUNWAY* runway_num_exists(int runway_num);
+static RUNWAY* runway_num_exists(int runway_num);
 BOOL create_airport();
 
 

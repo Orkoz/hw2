@@ -1,3 +1,5 @@
+/* runway.h - intarface to an Runway ADT which implements a singal runway*/
+
 #ifndef RUNWAY_H_
 #define RUNWAY_H_
 
@@ -19,8 +21,7 @@ RUNWAY* createRunway (int runway_num, FlightType runway_type);
 void destroyRunway (RUNWAY* runway);
 
 BOOL isFlightExists (RUNWAY* runway, int flight_num);
-FLIGHT* isFlightDest(RUNWAY* runway, char dest[]);
-
+static FLIGHT* isFlightDest(RUNWAY* runway, char dest[]);
 int getFlightNum (RUNWAY* runway);
 Result addFlight (RUNWAY* runway, FLIGHT* flight);
 Result removeFlight(RUNWAY* runway, int flight_num);

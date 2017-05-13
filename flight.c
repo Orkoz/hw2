@@ -1,22 +1,8 @@
-#ifndef STRING_H_
 #include <string.h>
-#endif
-
-#ifndef STDIO_H_
 #include <stdio.h>
-#endif
-
-#ifndef STDLIB_H_
 #include <stdlib.h>
-#endif
-
-#ifndef EX2_H_
 #include "ex2.h"
-#endif
-
-#ifndef FLIGHT_H_
 #include "flight.h"
-#endif
 
 typedef struct flight_t{
 	int flight_num;
@@ -30,11 +16,11 @@ typedef struct flight_t{
 //* Function name: createFlight.
 //* Description: creates a flight struct according to the inputted parameters.
 //* Parameters: 
-//*		-	flight_num – the flight number
-//*		-	flight_type-  the flight type
-//*		-	destination[] – an array[3] of the destination of the flight,
-//*		-	emergency -  is the flight emergency (BOOLean).
-//* Return Value: a pointer to a flight struct.
+//*		-	flight_num – the flight number (a number from 1 to MAX_ID).
+//*		-	flight_type-  the flight type (DOMESTIC or INTERNATIONAL).
+//*		-	destination[] – an array[3] of the destination of the flight.
+//*		-	emergency -  is the flight emergency (BOOL).
+//* Return Value: a pointer to the new FLIGHT struct.
 //*************************************************************************
 
 FLIGHT* createFlight(int flight_num, FlightType flight_type, char destination[], BOOL emergency){
@@ -87,12 +73,13 @@ void printFlight(FLIGHT* flight){
 	printf("Flight %i %d %s %d\n", flight->flight_num,type,flight->destination,emg);
 }
 
+
 //*************************************************************************
 //* Function name: is_num_valid.
 //* Description: checks if the input flight or runway number is valid (a number between 1 to MAX_ID).
 //* Parameters:
 //*		-	num – flight or runway number.
-//* Return Value: BOOLean (true if valid and false if not).
+//* Return Value: BOOL (TRUE if valid and FALSE if not).
 //*************************************************************************
 
 BOOL is_num_valid(int num){
@@ -104,15 +91,12 @@ BOOL is_num_valid(int num){
 }
 
 
-
-
-
 //*************************************************************************
 //* Function name: is_destination_valid.
 //* Description: checks if the input flight destination is valid (3 capital letters array).
 //* Parameters:
 //*		-	destination – a char array of the flight destination.
-//* Return Value: BOOLean (true if valid and false if not).
+//* Return Value: BOOL (TRUE if valid and FALSE if not).
 //*************************************************************************
 
 BOOL is_destination_valid(char destination[]){
@@ -137,16 +121,8 @@ BOOL is_destination_valid(char destination[]){
 //* Description: checks if the input flight emergency parameter is valid (TRUE or FALSE).
 //* Parameters:
 //*		-	emergency – flight emergency parameter (enum BOOL).
-//* Return Value: BOOLean (true if valid and false if not).
+//* Return Value: BOOL (TRUE if valid and FALSE if not).
 //*************************************************************************
-//
-//BOOL is_emergency_valid(BOOL emergency){
-//	if (emergency == TRUE || emergency == FALSE)
-//		return TRUE;
-//	
-//	//fprintf(stderr, "Invalid input emergency parameter.\n Please enter either TRUE or FALSE\n");
-//	return FALSE;
-//}
 
 BOOL compare_flight_num(FLIGHT* flight,int flight_num){
 	if (flight->flight_num == flight_num)
@@ -158,6 +134,16 @@ BOOL compare_flight_num(FLIGHT* flight,int flight_num){
 	}
 }
 
+
+//*************************************************************************
+//* Function name: compare_flight_dest
+//* Description: compare between two 3 char string - the destination of the flight and the given destination
+//* Parameters:
+//*		-	flight - a pointer to the flight
+//*		-	destination - a 3 char string to compare to.
+//* Return Value: BOOL (TRUE if valid and FALSE if not).
+//*************************************************************************
+
 BOOL compare_flight_dest(FLIGHT* flight, char destination[]){
 	if (strcmp(flight->destination, destination))
 	{
@@ -168,23 +154,68 @@ BOOL compare_flight_dest(FLIGHT* flight, char destination[]){
 	}
 }
 
+
+//*************************************************************************
+//* Function name: change_flight_dest
+//* Description: change the destination of the flight to the given destination
+//* Parameters:
+//*		-	flight - a pointer to the flight
+//*		-	destination - a 3 char string to change to.
+//* Return Value: None.
+//*************************************************************************
+
 void change_flight_dest(FLIGHT* flight, char destination[]){
 	strcpy(flight->destination,destination);
 }
+
+
+//*************************************************************************
+//* Function name: get_flight_num
+//* Description: return the number of the given flight.
+//* Parameters:
+//*		-	flight - a pointer to the flight
+//* Return Value: int - the number of the flight (a number between 1 to MAX_ID)
+//*************************************************************************
 
 int get_flight_num(FLIGHT* flight){
 	return flight->flight_num;
 }
 
-FlightType get_flight_type(FLIGHT* flight)
-{
+
+//*************************************************************************
+//* Function name: get_flight_type
+//* Description: return the type of the given flight.
+//* Parameters:
+//*		-	flight - a pointer to the flight
+//* Return Value: FlightType (DOMESTIC or INTERNATIONAL)
+//*************************************************************************
+
+FlightType get_flight_type(FLIGHT* flight){
 	return flight->flight_type;
 }
-char* get_flight_dest(FLIGHT* flight)
-{
+
+
+//*************************************************************************
+//* Function name: get_flight_dest
+//* Description: return the destination of the given flight.
+//* Parameters:
+//*		-	flight - a pointer to the flight
+//* Return Value: 3 character array (the destination of the flight).
+//*************************************************************************
+
+char* get_flight_dest(FLIGHT* flight){
 	return flight->destination;
 }
-BOOL get_flight_emerg(FLIGHT* flight)
-{
+
+
+//*************************************************************************
+//* Function name: get_flight_emerg
+//* Description: return if the given flight is an emergency flight.
+//* Parameters:
+//*		-	flight - a pointer to the flight
+//*  Return Value: BOOL (TRUE if valid and FALSE if not).
+//*************************************************************************
+
+BOOL get_flight_emerg(FLIGHT* flight){
 	return flight->emergency;
 }
