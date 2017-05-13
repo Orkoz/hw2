@@ -230,12 +230,12 @@ Result departFromRunway(int runway_num, int number_of_flights){
 	
 	RUNWAY* temp_runway = runway_num_exists(runway_num);
 
-	if (temp_runway == NULL)
+	if (temp_runway == NULL || getFlightNum(temp_runway) < number_of_flights)
 		return FAILURE;
 
-	while (getFlightNum(temp_runway) >= number_of_flights){
-		depart(temp_runway);
-	}
+    for (int i = 0; i < number_of_flights; ++i) {
+        depart(temp_runway);
+    }
 
 	return SUCCESS;
 }
