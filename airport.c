@@ -223,9 +223,10 @@ Result delay(char destination[]){
 		return SUCCESS;
 
 	RUNWAY_ITEM* temp_runway_item = airport->runway_list;
-	RUNWAY* temp_runway = createRunway(get_runway_num(temp_runway_item->runway), get_runway_type(temp_runway_item->runway));
+	//RUNWAY* temp_runway = createRunway(get_runway_num(temp_runway_item->runway), get_runway_type(temp_runway_item->runway));
 
 	while (temp_runway_item != NULL){
+		RUNWAY* temp_runway = createRunway(get_runway_num(temp_runway_item->runway), get_runway_type(temp_runway_item->runway));
 		FLIGHT* temp_flight = isFlightDest(temp_runway_item->runway, destination);
 		while (temp_flight != NULL) {
 			addFlight(temp_runway, temp_flight);
@@ -241,9 +242,10 @@ Result delay(char destination[]){
 		}
 
 		temp_runway_item = temp_runway_item->next_runway;
+		destroyRunway(temp_runway);
 	}
 
-	destroyRunway(temp_runway);
+	//destroyRunway(temp_runway);
 	return SUCCESS;
 }
 
