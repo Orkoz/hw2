@@ -1,39 +1,9 @@
-//*************************************************************************
-//* Function name:
-//* Description:
-//* Parameters:
-//* Return Value:
-//*************************************************************************
-
-#ifndef STDIO_H_
 #include <stdio.h>
-#endif
-
-#ifndef STDLIB_H_
 #include <stdlib.h>
-#endif
-
-#ifndef STRING_H_
 #include <string.h>
-#endif
-
-#ifndef EX2_H_
 #include "ex2.h"
-#endif
-
-#ifndef FLIGHT_H_
 #include "flight.h"
-#endif
-
-#ifndef RUNWAY_H_
 #include "runway.h"
-#endif
-
-/*
-typedef יוצר קיצור של טיפוס מורכב
-enum מייצר טיפוס חדש
-*/
-
 
 typedef struct runway_t{
 	int runway_num;
@@ -46,16 +16,17 @@ typedef struct flight_item{
 	FLIGHT_ITEM* next_flight_item;
 }	FLIGHT_ITEM;
 
+
 //*************************************************************************
-//* Function name:
-//* Description:
+//* Function name: createRunway
+//* Description: creates a runway according to the given parameters.
 //* Parameters:
-//* Return Value:
+//*		-	runway_num - the ranway number (a number from 1 to MAX_ID).
+//*		-	runway_type - the ranway type (DOMESTIC or INTERNATIONAL)
+//*  Return Value: a pointer to the new RUNWAY struct, NULL if failed
 //*************************************************************************
 
-RUNWAY* createRunway (int runway_num, FlightType runway_type)
-{
-	// Do we need to check input vars here or in main?
+RUNWAY* createRunway (int runway_num, FlightType runway_type){
 	RUNWAY* temp_runway = (RUNWAY*)malloc(sizeof(RUNWAY));
 	if (temp_runway != NULL)
 	{
@@ -68,18 +39,20 @@ RUNWAY* createRunway (int runway_num, FlightType runway_type)
 	}
 }
 
+
 //*************************************************************************
-//* Function name:
-//* Description:
+//* Function name: destroyRunway
+//* Description: first, remove all the runway's flights and then remove the runway itself  from the airport and free all relevant memory.
 //* Parameters:
-//* Return Value:
+//*		-	runway - pointer to a RUNWAY struct.
+//*  Return Value: None.
 //*************************************************************************
 
-void destroyRunway (RUNWAY* runway)
-{
-	// Do we need to check input vars here or in main?
+void destroyRunway (RUNWAY* runway){
 	if (runway == NULL)
 		return;
+	
+	//remove of all the runway's flights
 	FLIGHT_ITEM* flight_item;
 	flight_item = runway->first_flight;
 	while (flight_item != NULL)
@@ -93,24 +66,28 @@ void destroyRunway (RUNWAY* runway)
 		flight_item = flight_item->next_flight_item;
 		free(temp_flight_item);
 	}
+	
+	//remove the runway itself
 	free(runway);
 	return;
 }
 
+
 //*************************************************************************
-//* Function name:
-//* Description:
+//* Function name: isFlightExists.
+//* Description: checks if a flight (recognized by its number) exists in the runway.
 //* Parameters:
-//* Return Value:
+//*		-	runway - pointer to a RUNWAY struct.
+//*		-	flight_num - the number of the flight that will be searched.
+//*  Return Value: BOOL (TRUE if valid and FALSE if not).
 //*************************************************************************
 
-BOOL isFlightExists (RUNWAY* runway, int flight_num)
-{
+BOOL isFlightExists (RUNWAY* runway, int flight_num){
 	if (runway == NULL || is_num_valid(flight_num) == FALSE)
 		return FALSE;
+	
 	FLIGHT_ITEM* temp_flight_item;
 	temp_flight_item = runway->first_flight;
-	
 	while (temp_flight_item != NULL)
 	{
 		if (compare_flight_num(temp_flight_item->this_flight, flight_num) == TRUE)
@@ -120,7 +97,17 @@ BOOL isFlightExists (RUNWAY* runway, int flight_num)
 	return FALSE;
 }
 
-FLIGHT* isFlightDest(RUNWAY* runway, char dest[]){
+
+//*************************************************************************
+//* Function name: isFlightDest
+//* Description: checks if a flight (recognized by its destination) exists in the runway.
+//* Parameters:
+//*		-	runway - pointer to a RUNWAY struct.
+//*		-	dest[] – an array[3] of the destination of the flight.
+//*  Return Value: a pointer to the found FLIGHT struct, NULL if not found.
+//*************************************************************************
+
+static FLIGHT* isFlightDest(RUNWAY* runway, char dest[]){
 	if (runway == NULL || is_destination_valid(dest) == FALSE)
 		return NULL;
 
@@ -135,17 +122,19 @@ FLIGHT* isFlightDest(RUNWAY* runway, char dest[]){
 	return NULL;
 }
 
+
 //*************************************************************************
-//* Function name:
-//* Description:
+//* Function name: getFlightNum
+//* Description: returns the number of flight in the ranway.
 //* Parameters:
-//* Return Value:
+//*		-	runway - pointer to a RUNWAY struct.
+//*  Return Value: int - the number of the flights (a number between 1 to MAX_ID), -1 if failed.
 //*************************************************************************
 
-int getFlightNum (RUNWAY* runway)
-{
+int getFlightNum (RUNWAY* runway){
 	if (runway == NULL)
 		return -1;
+	
 	int counter = 0;
 	FLIGHT_ITEM* flight_item;
 	flight_item = runway->first_flight;
@@ -158,15 +147,20 @@ int getFlightNum (RUNWAY* runway)
 	return counter;
 }
 
+
 //*************************************************************************
-//* Function name:
-//* Description:
+//* Function name: addFlight
+//* Description: add a flight to the airport according to its parameters. the flight inserted to the last of its designated runway: 
+//* 			the most 'free' runway the matches the flight type. if there are two match runways with the same number of flights, the flight will 
+//* 			be insert into the one with the lower runway_num. emergency flight will be entered after all the other emergency flight that are already 
+//* 			in the runway.
 //* Parameters:
-//* Return Value:
+//*		-	runway - pointer to a RUNWAY.
+//*		-	flight - a pointer to the flight.
+//*  Return Value: FAILURE or SUCCESS
 //*************************************************************************
 
-Result addFlight (RUNWAY* runway, FLIGHT* flight)
-{
+Result addFlight (RUNWAY* runway, FLIGHT* flight){
 	// checking pointers
 	if (runway == NULL || flight == NULL)
 		return FAILURE;
@@ -227,15 +221,17 @@ Result addFlight (RUNWAY* runway, FLIGHT* flight)
 	return SUCCESS;
 }
 
+
 //*************************************************************************
-//* Function name:
-//* Description:
+//* Function name: removeFlight
+//* Description: removes the flight (recognized by its number) from the airport. and free the relevant memory.
 //* Parameters:
-//* Return Value:
+//*		-	runway - pointer to a RUNWAY.
+//*		-	flight_num - the number of the flight that will be removed. (a number between 1 to MAX_ID)
+//*  Return Value: FAILURE or SUCCESS
 //*************************************************************************
 
-Result removeFlight(RUNWAY* runway, int flight_num)
-{
+Result removeFlight(RUNWAY* runway, int flight_num){
 	if (runway == NULL || runway->first_flight == NULL || is_num_valid(flight_num) == FALSE)
 		return FAILURE;
 	
@@ -271,15 +267,16 @@ Result removeFlight(RUNWAY* runway, int flight_num)
 	return FAILURE;
 }
 
+
 //*************************************************************************
-//* Function name:
-//* Description:
+//* Function name: depart
+//* Description: removes the first flight of the given runway, and free the relevant memory.
 //* Parameters:
-//* Return Value:
+//*		-	runway - pointer to a RUNWAY.
+//*  Return Value: BOOL (TRUE if valid and FALSE if not).
 //*************************************************************************
 
-Result depart (RUNWAY* runway)
-{
+Result depart (RUNWAY* runway){
 	if (runway == NULL || runway->first_flight == NULL)
 		return FAILURE;
 	int flight_num;
@@ -289,16 +286,16 @@ Result depart (RUNWAY* runway)
 	
 }
 
+
 //*************************************************************************
-//* Function name:
-//* Description:
+//* Function name: printRunway
+//* Description: print to the screen the details of the runway.
 //* Parameters:
-//* Return Value:
+//*		-	runway - pointer to a RUNWAY.
+//*  Return Value: None.
 //*************************************************************************
 
-
-void printRunway (RUNWAY* runway)
-{
+void printRunway (RUNWAY* runway){
 	int flight_num;
 	flight_num = getFlightNum(runway);
 	printf("Runway %d ", runway->runway_num);
@@ -320,10 +317,28 @@ void printRunway (RUNWAY* runway)
 	}
 }
 
+
+//*************************************************************************
+//* Function name: get_runway_num
+//* Description: return the number of the given runway.
+//* Parameters:
+//*		-	runway - pointer to a RUNWAY.
+//* Return Value: int - the number of the flight (a number between 1 to MAX_ID)
+//*************************************************************************
+
 int get_runway_num(RUNWAY* runway){
 
 	return runway->runway_num;
 }
+
+
+//*************************************************************************
+//* Function name: get_runway_type
+//* Description: return the type of the given runway.
+//* Parameters:
+//*		-	runway - pointer to a RUNWAY.
+//* Return Value: FlightType (DOMESTIC or INTERNATIONAL)
+//*************************************************************************
 
 FlightType get_runway_type(RUNWAY* runway){
 	return runway->runway_type;

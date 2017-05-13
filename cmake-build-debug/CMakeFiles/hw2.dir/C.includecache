@@ -45,8 +45,6 @@ flight.h
 C:/Users/Or/Desktop/hw2/flight.h
 
 C:/Users/Or/Desktop/hw2/flight.h
-stdbool.h
--
 ex2.h
 C:/Users/Or/Desktop/hw2/ex2.h
 
@@ -61,10 +59,6 @@ ex2.h
 C:/Users/Or/Desktop/hw2/ex2.h
 airport.h
 C:/Users/Or/Desktop/hw2/airport.h
-runway.h
-C:/Users/Or/Desktop/hw2/runway.h
-flight.h
-C:/Users/Or/Desktop/hw2/flight.h
 
 C:/Users/Or/Desktop/hw2/runway.c
 stdio.h

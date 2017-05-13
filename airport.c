@@ -1,30 +1,10 @@
-#ifndef STRING_H_
 #include <string.h>
-#endif
-
-#ifndef STDIO_H_
 #include <stdio.h>
-#endif
-
-#ifndef STDLIB_H_
 #include <stdlib.h>
-#endif
-
-#ifndef EX2_H_
 #include "ex2.h"
-#endif
-
-#ifndef RUNWAY_H_
 #include "runway.h"
-#endif
-
-#ifndef FLIGHT_H_
 #include "flight.h"
-#endif
-
-#ifndef AIRPORT_H_
 #include "airport.h"
-#endif
 
 typedef struct runway_item{
 	RUNWAY* runway;
@@ -39,6 +19,14 @@ typedef struct airport_t{
 
 static AIRPORT* airport;
 
+
+//*************************************************************************
+//* Function name: create_airport
+//* Description: creates an empty airport ADT.
+//* Parameters: None.
+//* Return Value: BOOL (TRUE if valid and FALSE if not).
+//*************************************************************************
+
 BOOL create_airport()
 {
 	airport = (AIRPORT*)malloc(sizeof(AIRPORT));
@@ -52,8 +40,18 @@ BOOL create_airport()
 }
 
 
+//*************************************************************************
+//* Function name: addRunway
+//* Description: add a runway to the airport (at the end of the runway list) according to the given parameters.
+//* Parameters:
+//*		-	runway_num - the ranway number (a number from 1 to MAX_ID).
+//*		-	runway_type - the ranway type (DOMESTIC or INTERNATIONAL)
+//*  Return Value: FAILURE or SUCCESS
+//*************************************************************************
+
 Result addRunway(int runway_num, FlightType runway_type) {
   
+	//checks if there is already a runway with the same number.
 	if (runway_num_exists(runway_num) != NULL)
 		return FAILURE;
 
@@ -79,7 +77,16 @@ Result addRunway(int runway_num, FlightType runway_type) {
 	return FAILURE;
 }
 
-RUNWAY* runway_num_exists(int runway_num){
+
+//*************************************************************************
+//* Function name: isFlightExists.
+//* Description: checks if there is already a runway in the airport with the given number.
+//* Parameters:
+//*		-	runway_num - the ranway number (a number from 1 to MAX_ID).
+//*  Return Value: a pointer to the founed RUNWAY struct, NULL if failed.
+//*************************************************************************
+
+static RUNWAY* runway_num_exists(int runway_num){
 
 	RUNWAY_ITEM* temp_runway = airport->runway_list;
 	while (temp_runway != NULL)
@@ -90,6 +97,15 @@ RUNWAY* runway_num_exists(int runway_num){
 	}
 	return NULL;
 }
+
+
+//*************************************************************************
+//* Function name: removeRunway.
+//* Description: first, remove all the runway's (recognized by its number) flights and then remove the runway itself  from the airport and free all relevant memory.
+//* Parameters:
+//*		-	runway_num - the ranway number (a number from 1 to MAX_ID).
+//*  Return Value: FAILURE or SUCCESS
+//*************************************************************************
 
 Result removeRunway(int runway_num){
 	if (airport->runway_list == NULL)
@@ -127,6 +143,21 @@ Result removeRunway(int runway_num){
 	}
 	return FAILURE;
 }
+
+
+//*************************************************************************
+//* Function name: addFlightToAirport
+//* Description: add a flight to the airport according to its parameters. the flight inserted to the last of its designated runway: 
+//* 			the most 'free' runway the matches the flight type. if there are two match runways with the same number of flights, the flight will 
+//* 			be insert into the one with the lower runway_num. emergency flight will be entered after all the other emergency flight that are already 
+//* 			in the runway.
+//* Parameters: 
+//*		-	flight_num – the flight number (a number from 1 to MAX_ID).
+//*		-	flight_type-  the flight type (DOMESTIC or INTERNATIONAL).
+//*		-	destination[] – an array[3] of the destination of the flight.
+//*		-	emergency -  is the flight emergency (BOOL).
+//*  Return Value: FAILURE or SUCCESS
+//*************************************************************************
 
 Result addFlightToAirport(int flight_num, FlightType flight_type, char destination[], BOOL emergency)
 	{
@@ -185,26 +216,46 @@ Result addFlightToAirport(int flight_num, FlightType flight_type, char destinati
 	}
 
 
+//*************************************************************************
+//* Function name: departFromRunway.
+//* Description: removes the firsts flights from the runway so that the number of flights in the runway will be less than the given number. 
+//* 			frees the relevant memory
+//* Parameters:
+//*		-	runway_num - the ranway number (a number from 1 to MAX_ID).
+//*		-	number_of_flights - the max number of flight in the runway.
+//*  Return Value: FAILURE or SUCCESS
+//*************************************************************************
+
 Result departFromRunway(int runway_num, int number_of_flights){
+	
 	RUNWAY* temp_runway = runway_num_exists(runway_num);
 
-	if ((temp_runway == NULL) || (getFlightNum(temp_runway) < number_of_flights)) {
+	if (temp_runway == NULL)
 		return FAILURE;
-	}
 
-	for (int i = 0; i < number_of_flights; ++i) {
+	while (getFlightNum(temp_runway) >= number_of_flights){
 		depart(temp_runway);
 	}
 
 	return SUCCESS;
 }
 
+
+//*************************************************************************
+//* Function name: changeDest.
+//* Description: change every flight in the airport that it's destination is destination[] to new_destination[]
+//* Parameters:
+//*		-	destination - an array[3] of the destination of the flight.
+//*		-	new_destination - an array[3] of the new destination of the flight.
+//*  Return Value: FAILURE or SUCCESS
+//*************************************************************************
+
 Result changeDest(char destination[],char new_destination[]){
 	if (!(is_destination_valid(destination) && is_destination_valid(new_destination)))
 		return FAILURE;
-
+	
+	//goes trow every flight in the airport that it's destination is destination[] and change it to new_destination[]
 	RUNWAY_ITEM* temp_runway_item = airport->runway_list;
-
 	while (temp_runway_item != NULL){
 		FLIGHT* temp_flight = isFlightDest(temp_runway_item->runway, destination);
 		while (temp_flight != NULL) {
@@ -216,24 +267,35 @@ Result changeDest(char destination[],char new_destination[]){
 	return SUCCESS;
 }
 
+//*************************************************************************
+//* Function name: delay.
+//* Description: delay (moves to the end of the relevant runway list) all the flight which there distention equals to the given destination.
+//* Parameters:
+//*		-	destination - an array[3] of the destination of the flight.
+//*  Return Value: FAILURE or SUCCESS
+//*************************************************************************
+
+
 Result delay(char destination[]){
 	if (!(is_destination_valid(destination)))
 		return FAILURE;
 	if (airport->runway_list == NULL)
 		return SUCCESS;
 
-	RUNWAY_ITEM* temp_runway_item = airport->runway_list;
-	//RUNWAY* temp_runway = createRunway(get_runway_num(temp_runway_item->runway), get_runway_type(temp_runway_item->runway));
-
+	//goes trow every flight in the airport.
+	RUNWAY_ITEM* temp_runway_item = airport->runway_list; 	/*a temp runway list which will contain all the runway's flight which there 
+															distention equals to the given destination, one runway at the time*/
+	RUNWAY* temp_runway = createRunway(get_runway_num(temp_runway_item->runway), get_runway_type(temp_runway_item->runway));
 	while (temp_runway_item != NULL){
-		RUNWAY* temp_runway = createRunway(get_runway_num(temp_runway_item->runway), get_runway_type(temp_runway_item->runway));
-		FLIGHT* temp_flight = isFlightDest(temp_runway_item->runway, destination);
+		FLIGHT* temp_flight = isFlightDest(temp_runway_item->runway, destination); /*find the first flight in the runway which its distention 
+																					equals to the given destination.*/
 		while (temp_flight != NULL) {
-			addFlight(temp_runway, temp_flight);
-			removeFlight(temp_runway_item->runway, get_flight_num(temp_flight));
-			temp_flight= isFlightDest(temp_runway_item->runway, destination);
+			addFlight(temp_runway, temp_flight); //add this flight to the a temp runway list
+			removeFlight(temp_runway_item->runway, get_flight_num(temp_flight));//remove the flight from its original runway
+			temp_flight= isFlightDest(temp_runway_item->runway, destination); // get the next flight in this runway
 		}
 
+		//put all the flights back in the original runway.
 		temp_flight = isFlightDest(temp_runway, destination);
 		while (temp_flight != NULL) {
 			addFlight(temp_runway_item->runway, temp_flight);
@@ -242,13 +304,19 @@ Result delay(char destination[]){
 		}
 
 		temp_runway_item = temp_runway_item->next_runway;
-		destroyRunway(temp_runway);
 	}
 
-	//destroyRunway(temp_runway);
+	destroyRunway(temp_runway);
 	return SUCCESS;
 }
 
+
+//*************************************************************************
+//* Function name: printAirport
+//* Description: print to the screen the details of the airport.
+//* Parameters: None.
+//*  Return Value: None.
+//*************************************************************************
 
 void printAirport()
 {
@@ -259,8 +327,15 @@ void printAirport()
 		printRunway(temp_runway_item->runway);
 		temp_runway_item = temp_runway_item->next_runway;
 	}
-	printf("\n");
 }
+
+
+//*************************************************************************
+//* Function name: destroyAirport
+//* Description: first, remove all the runway and then remove the airport and free all relevant memory.
+//* Parameters:None.
+//*  Return Value: None.
+//*************************************************************************
 
 void destroyAirport()
 {
