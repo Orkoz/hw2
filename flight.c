@@ -70,7 +70,7 @@ void printFlight(FLIGHT* flight){
 		emg = 'E';
 	if (flight->flight_type==INTERNATIONAL) 
 		type = 'I';
-	printf("Flight %i %d %s %d\n", flight->flight_num,type,flight->destination,emg);
+    printf("Flight %d %c %s %c\n", flight->flight_num,type,flight->destination,emg);
 }
 
 
@@ -107,7 +107,7 @@ BOOL is_destination_valid(char destination[]){
 	}
 	
     for (int i=0;i<length;i++){
-		if((destination[i] < 'A' && destination[i] > 'Z')) {
+		if((destination[i] < 'A' || destination[i] > 'Z')) {
 			return FALSE;
 		}
 	}

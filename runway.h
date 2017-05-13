@@ -21,7 +21,7 @@ RUNWAY* createRunway (int runway_num, FlightType runway_type);
 void destroyRunway (RUNWAY* runway);
 
 BOOL isFlightExists (RUNWAY* runway, int flight_num);
-static FLIGHT* isFlightDest(RUNWAY* runway, char dest[]);
+FLIGHT* isFlightDest(RUNWAY* runway, char dest[]);
 int getFlightNum (RUNWAY* runway);
 Result addFlight (RUNWAY* runway, FLIGHT* flight);
 Result removeFlight(RUNWAY* runway, int flight_num);

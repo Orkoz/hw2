@@ -107,7 +107,7 @@ BOOL isFlightExists (RUNWAY* runway, int flight_num){
 //*  Return Value: a pointer to the found FLIGHT struct, NULL if not found.
 //*************************************************************************
 
-static FLIGHT* isFlightDest(RUNWAY* runway, char dest[]){
+FLIGHT* isFlightDest(RUNWAY* runway, char dest[]){
 	if (runway == NULL || is_destination_valid(dest) == FALSE)
 		return NULL;
 
