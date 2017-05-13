@@ -4,6 +4,7 @@ project(hw2)
 set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCE_FILES
+        main.c
         airport.c
         airport.h
         ex2.h
