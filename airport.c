@@ -6,15 +6,15 @@
 #include "flight.h"
 #include "airport.h"
 
-typedef struct runway_item{
+struct runway_item{
 	RUNWAY* runway;
 	RUNWAY_ITEM* next_runway;
-}RUNWAY_ITEM;
+};
 
-typedef struct airport_t{
+struct airport_t{
 	RUNWAY_ITEM* runway_list;
 	RUNWAY_ITEM* last_runway;
-}AIRPORT;
+};
 
 
 static AIRPORT* airport;
@@ -57,7 +57,7 @@ Result addRunway(int runway_num, FlightType runway_type) {
 
 	RUNWAY* new_runway = createRunway(runway_num, runway_type);
 	RUNWAY_ITEM* new_runway_item = (RUNWAY_ITEM*)malloc(sizeof(RUNWAY_ITEM));
-	if (new_runway_item !=NULL){
+	if ((new_runway_item != NULL) && (new_runway != NULL)){
 		new_runway_item->runway = new_runway;
 		new_runway_item->next_runway = NULL;
 
@@ -86,7 +86,7 @@ Result addRunway(int runway_num, FlightType runway_type) {
 //*  Return Value: a pointer to the founed RUNWAY struct, NULL if failed.
 //*************************************************************************
 
-static RUNWAY* runway_num_exists(int runway_num){
+RUNWAY* runway_num_exists(int runway_num){
 
 	RUNWAY_ITEM* temp_runway = airport->runway_list;
 	while (temp_runway != NULL)
@@ -204,15 +204,13 @@ Result addFlightToAirport(int flight_num, FlightType flight_type, char destinati
 			temp_runway_item = temp_runway_item->next_runway;
 		}
 		
-		if (minimal_flights_runway!= NULL && addFlight(minimal_flights_runway->runway, flight) == SUCCESS)
-		{
-			destroyFlight(flight);
-			return SUCCESS;
-		} else
-		{
-			destroyFlight(flight);
-			return FAILURE;
-		}
+		if (minimal_flights_runway!= NULL){
+      if (addFlight(minimal_flights_runway->runway, flight) == SUCCESS)
+			  return SUCCESS;
+   }
+    
+    destroyFlight(flight);
+    return FAILURE;
 	}
 
 
@@ -232,8 +230,8 @@ Result departFromRunway(int runway_num, int number_of_flights){
 
 	if (temp_runway == NULL || getFlightNum(temp_runway) < number_of_flights)
 		return FAILURE;
-
-    for (int i = 0; i < number_of_flights; ++i) {
+    int i;
+    for (i = 0; i < number_of_flights; ++i) {
         depart(temp_runway);
     }
 

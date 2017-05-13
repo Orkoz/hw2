@@ -4,12 +4,12 @@
 #include "ex2.h"
 #include "flight.h"
 
-typedef struct flight_t{
+struct flight_t{
 	int flight_num;
 	FlightType flight_type;
 	char destination[DEST_CHAR_NUM+1];
 	BOOL emergency;
-}FLIGHT;
+};
 
 
 //*************************************************************************
@@ -27,7 +27,7 @@ FLIGHT* createFlight(int flight_num, FlightType flight_type, char destination[],
 
 	BOOL valid = (BOOL) (is_num_valid(flight_num) && is_destination_valid(destination)); 
 	
-	if (valid){
+	if (valid == TRUE){
 		FLIGHT* temp_flight = (FLIGHT*)malloc(sizeof(FLIGHT));
 		if (temp_flight != NULL){
 			temp_flight->flight_num=flight_num;
@@ -50,7 +50,6 @@ FLIGHT* createFlight(int flight_num, FlightType flight_type, char destination[],
 //*************************************************************************
 
 void destroyFlight(FLIGHT* flight){
-
 	free(flight);
 }
 
@@ -85,8 +84,7 @@ void printFlight(FLIGHT* flight){
 BOOL is_num_valid(int num){
 	if (num >= 1 && num <= MAX_ID)
 		return TRUE;
-	
-	//fprintf(stderr, "Invalid input number.\n Please enter a number between 1 to %d\n", MAX_ID);
+
 	return FALSE;
 }
 
@@ -105,8 +103,8 @@ BOOL is_destination_valid(char destination[]){
 	if (length != DEST_CHAR_NUM){
 		return FALSE;
 	}
-	
-    for (int i=0;i<length;i++){
+	  int i;
+    for (i=0;i<length;i++){
 		if((destination[i] < 'A' || destination[i] > 'Z')) {
 			return FALSE;
 		}
