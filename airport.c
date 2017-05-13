@@ -257,6 +257,7 @@ void printAirport()
 		printRunway(temp_runway_item->runway);
 		temp_runway_item = temp_runway_item->next_runway;
 	}
+	printf("\n");
 }
 
 void destroyAirport()
