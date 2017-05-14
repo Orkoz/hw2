@@ -143,13 +143,12 @@ BOOL compare_flight_num(FLIGHT* flight,int flight_num){
 //*************************************************************************
 
 BOOL compare_flight_dest(FLIGHT* flight, char destination[]){
-	if (strcmp(flight->destination, destination))
-	{
-		return FALSE;
-	} else
-	{
-		return TRUE;
-	}
+    if (flight != NULL){
+    	if (strcmp(flight->destination, destination))
+    		return FALSE;
+    }
+
+    return TRUE;
 }
 
 
@@ -163,7 +162,8 @@ BOOL compare_flight_dest(FLIGHT* flight, char destination[]){
 //*************************************************************************
 
 void change_flight_dest(FLIGHT* flight, char destination[]){
-	strcpy(flight->destination,destination);
+    if (flight != NULL)
+	    strcpy(flight->destination,destination);
 }
 
 
