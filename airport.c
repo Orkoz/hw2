@@ -74,6 +74,9 @@ Result addRunway(int runway_num, FlightType runway_type) {
 
 		return SUCCESS;
 	}
+	
+	destroyRunway(new_runway);
+	free(new_runway_item); 
 	return FAILURE;
 }
 
@@ -174,6 +177,7 @@ Result addFlightToAirport(int flight_num, FlightType flight_type, char destinati
 		// Also checking for the runway with minimal flights in list
 		RUNWAY_ITEM* temp_runway_item = airport->runway_list;
 		int counter = 0;
+		int minimal_runway_num = 0;
 		RUNWAY_ITEM* minimal_flights_runway = NULL;
 		
 		while (temp_runway_item != NULL)
@@ -192,21 +196,29 @@ Result addFlightToAirport(int flight_num, FlightType flight_type, char destinati
 				{
 					minimal_flights_runway = temp_runway_item;
 					counter = getFlightNum(minimal_flights_runway->runway);
-				} else
+					minimal_runway_num = get_runway_num(minimal_flights_runway->runway);
+				} 
+				else if (getFlightNum(temp_runway_item->runway) < counter)
 				{
-					if (getFlightNum(temp_runway_item->runway) < counter)
-					{
 						minimal_flights_runway = temp_runway_item;
 						counter = getFlightNum(minimal_flights_runway->runway);
-					}
+						minimal_runway_num = get_runway_num(minimal_flights_runway->runway);
+				}
+				else if ((getFlightNum(temp_runway_item->runway) == counter) && (get_runway_num(temp_runway_item->runway) < minimal_runway_num))
+				{
+						minimal_flights_runway = temp_runway_item;
+						counter = getFlightNum(minimal_flights_runway->runway);
+						minimal_runway_num = get_runway_num(minimal_flights_runway->runway);	
 				}
 			}
 			temp_runway_item = temp_runway_item->next_runway;
 		}
 		
 		if (minimal_flights_runway!= NULL){
-      if (addFlight(minimal_flights_runway->runway, flight) == SUCCESS)
-			  return SUCCESS;
+      if (addFlight(minimal_flights_runway->runway, flight) == SUCCESS){
+			destroyFlight(flight);
+			return SUCCESS;
+	  }
    }
     
     destroyFlight(flight);

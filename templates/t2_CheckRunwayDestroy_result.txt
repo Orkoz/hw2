@@ -14,44 +14,35 @@ Runway 10000 international
 Runway 2 international
 0 flights are waiting:
 Runway 105 domestic
+0 flights are waiting:
+Runway 5 domestic
 1 flights are waiting:
 Flight 1 D HFA R
-Runway 5 domestic
-0 flights are waiting:
 
 Airport status:
 Runway 2 international
 0 flights are waiting:
 Runway 105 domestic
-1 flights are waiting:
-Flight 1 D HFA R
-Runway 5 domestic
 1 flights are waiting:
 Flight 2 D XXY R
+Runway 5 domestic
+1 flights are waiting:
+Flight 1 D HFA R
 
 Airport status:
 Runway 2 international
 0 flights are waiting:
 Runway 105 domestic
-1 flights are waiting:
-Flight 1 D HFA R
-Runway 5 domestic
 1 flights are waiting:
 Flight 2 D XXY R
+Runway 5 domestic
+1 flights are waiting:
+Flight 1 D HFA R
 
 Airport status:
 Runway 2 international
 0 flights are waiting:
 Runway 105 domestic
-7 flights are waiting:
-Flight 11 D HFA E
-Flight 13 D HFA E
-Flight 1 D HFA R
-Flight 3 D IRD R
-Flight 5 D HFA R
-Flight 7 D BFA R
-Flight 9 D RON R
-Runway 5 domestic
 7 flights are waiting:
 Flight 12 D HFA E
 Flight 14 D HFA E
@@ -60,6 +51,15 @@ Flight 4 D HWE R
 Flight 6 D HDF R
 Flight 8 D DOL R
 Flight 10 D HFA R
+Runway 5 domestic
+7 flights are waiting:
+Flight 11 D HFA E
+Flight 13 D HFA E
+Flight 1 D HFA R
+Flight 3 D IRD R
+Flight 5 D HFA R
+Flight 7 D BFA R
+Flight 9 D RON R
 
 Airport status:
 Runway 2 international
@@ -68,6 +68,17 @@ Flight 20 I HFA E
 Flight 21 I HFA E
 Flight 22 I HFA R
 Runway 105 domestic
+9 flights are waiting:
+Flight 12 D HFA E
+Flight 14 D HFA E
+Flight 18 D HFA E
+Flight 2 D XXY R
+Flight 4 D HWE R
+Flight 6 D HDF R
+Flight 8 D DOL R
+Flight 10 D HFA R
+Flight 16 D HFA R
+Runway 5 domestic
 10 flights are waiting:
 Flight 11 D HFA E
 Flight 13 D HFA E
@@ -79,17 +90,6 @@ Flight 7 D BFA R
 Flight 9 D RON R
 Flight 15 D HFA R
 Flight 17 D HFA R
-Runway 5 domestic
-9 flights are waiting:
-Flight 12 D HFA E
-Flight 14 D HFA E
-Flight 18 D HFA E
-Flight 2 D XXY R
-Flight 4 D HWE R
-Flight 6 D HDF R
-Flight 8 D DOL R
-Flight 10 D HFA R
-Flight 16 D HFA R
 
 Airport status:
 Runway 2 international
@@ -103,6 +103,19 @@ Flight 24 I ARK R
 Flight 25 I LKD R
 Flight 27 I GKL R
 Runway 105 domestic
+11 flights are waiting:
+Flight 12 D HFA E
+Flight 14 D HFA E
+Flight 18 D HFA E
+Flight 26 D FPD E
+Flight 30 D FLD E
+Flight 2 D XXY R
+Flight 4 D HWE R
+Flight 6 D HDF R
+Flight 8 D DOL R
+Flight 10 D HFA R
+Flight 16 D HFA R
+Runway 5 domestic
 12 flights are waiting:
 Flight 11 D HFA E
 Flight 13 D HFA E
@@ -116,19 +129,6 @@ Flight 7 D BFA R
 Flight 9 D RON R
 Flight 15 D HFA R
 Flight 17 D HFA R
-Runway 5 domestic
-11 flights are waiting:
-Flight 12 D HFA E
-Flight 14 D HFA E
-Flight 18 D HFA E
-Flight 26 D FPD E
-Flight 30 D FLD E
-Flight 2 D XXY R
-Flight 4 D HWE R
-Flight 6 D HDF R
-Flight 8 D DOL R
-Flight 10 D HFA R
-Flight 16 D HFA R
 
 Airport status:
 Runway 2 international
@@ -142,6 +142,19 @@ Flight 24 I ARK R
 Flight 25 I LKD R
 Flight 27 I GKL R
 Runway 105 domestic
+11 flights are waiting:
+Flight 12 D HFA E
+Flight 14 D HFA E
+Flight 18 D HFA E
+Flight 26 D FPD E
+Flight 30 D FLD E
+Flight 2 D XXY R
+Flight 4 D HWE R
+Flight 6 D HDF R
+Flight 8 D DOL R
+Flight 10 D HFA R
+Flight 16 D HFA R
+Runway 5 domestic
 12 flights are waiting:
 Flight 11 D HFA E
 Flight 13 D HFA E
@@ -155,19 +168,6 @@ Flight 7 D BFA R
 Flight 9 D RON R
 Flight 15 D HFA R
 Flight 17 D HFA R
-Runway 5 domestic
-11 flights are waiting:
-Flight 12 D HFA E
-Flight 14 D HFA E
-Flight 18 D HFA E
-Flight 26 D FPD E
-Flight 30 D FLD E
-Flight 2 D XXY R
-Flight 4 D HWE R
-Flight 6 D HDF R
-Flight 8 D DOL R
-Flight 10 D HFA R
-Flight 16 D HFA R
 
 Airport status:
 Runway 2 international
@@ -181,18 +181,19 @@ Flight 24 I ARK R
 Flight 25 I LKD R
 Flight 27 I GKL R
 Runway 5 domestic
-11 flights are waiting:
-Flight 12 D HFA E
-Flight 14 D HFA E
-Flight 18 D HFA E
-Flight 26 D FPD E
-Flight 30 D FLD E
-Flight 2 D XXY R
-Flight 4 D HWE R
-Flight 6 D HDF R
-Flight 8 D DOL R
-Flight 10 D HFA R
-Flight 16 D HFA R
+12 flights are waiting:
+Flight 11 D HFA E
+Flight 13 D HFA E
+Flight 19 D HFA E
+Flight 29 D TDA E
+Flight 31 D ETH E
+Flight 1 D HFA R
+Flight 3 D IRD R
+Flight 5 D HFA R
+Flight 7 D BFA R
+Flight 9 D RON R
+Flight 15 D HFA R
+Flight 17 D HFA R
 
 Airport status:
 Runway 2 international
@@ -206,18 +207,19 @@ Flight 24 I ARK R
 Flight 25 I LKD R
 Flight 27 I GKL R
 Runway 5 domestic
-11 flights are waiting:
-Flight 12 D HFA E
-Flight 14 D HFA E
-Flight 18 D HFA E
-Flight 26 D FPD E
-Flight 30 D FLD E
-Flight 2 D XXY R
-Flight 4 D HWE R
-Flight 6 D HDF R
-Flight 8 D DOL R
-Flight 10 D HFA R
-Flight 16 D HFA R
+12 flights are waiting:
+Flight 11 D HFA E
+Flight 13 D HFA E
+Flight 19 D HFA E
+Flight 29 D TDA E
+Flight 31 D ETH E
+Flight 1 D HFA R
+Flight 3 D IRD R
+Flight 5 D HFA R
+Flight 7 D BFA R
+Flight 9 D RON R
+Flight 15 D HFA R
+Flight 17 D HFA R
 
 Airport status:
 Runway 2 international

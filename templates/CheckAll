@@ -1,4 +1,5 @@
 #! /bin/bash
+cd ../templates
 
 ../submit/airport < in_1.txt 1> in_1_result.txt 2> err_1_result.txt
 ../submit/airport < in_2.txt 1> in_2_result.txt 2> err_2_result.txt
